@@ -23,15 +23,6 @@ import { theme_scheme_direction } from "../../store/setting/selectors";
 const OttHeroSlider = memo(() => {
   const themeSchemeDirection = useSelector(theme_scheme_direction);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [render, setRender] = useState(true)
-  useEffect(() => {
-    setThumbsSwiper(null)
-    setRender(false)
-    setTimeout(() => {
-      setRender(true)
-    }, 100);
-    return () => {};
-  }, [themeSchemeDirection]);
 
   return (
     <Fragment>
@@ -45,8 +36,8 @@ const OttHeroSlider = memo(() => {
               >
                 <div className="banner-thumb-slider-nav">
                   <Swiper
-                  key={themeSchemeDirection}
-                  dir={themeSchemeDirection}
+                    key={themeSchemeDirection}
+                    dir={themeSchemeDirection}
                     tag="ul"
                     thumbs={{
                       swiper:

@@ -41,18 +41,18 @@ const FrontendLayout = memo((props) => {
       {/* <Loader></Loader> */}
       <main className="main-content">
         {props.HeaderMega === "true" && <HeaderDefault></HeaderDefault>}
-        {props.HeaderMerchandise === "true" && (
+        {/* {props.HeaderMerchandise === "true" && (
           <HeaderMerchandise></HeaderMerchandise>
-        )}
+        )} */}
         <Suspense fallback={<Loader></Loader>}>
           <Outlet></Outlet>
         </Suspense>
       </main>
-      {props.FooterMerchandise === "true" ? (
+      {/* {props.FooterMerchandise === "true" ? (
         <MerchandiseFooter />
       ) : (
         <FooterDefault />
-      )}
+      )} */}
       <div
         id="back-to-top"
         style={{ display: "none" }}
@@ -67,7 +67,7 @@ const FrontendLayout = memo((props) => {
           <i className="fa-solid fa-chevron-up"></i>
         </Link>
       </div>
-      <SettingOffCanvas />
+      {/* <SettingOffCanvas /> */}
     </Fragment>
   );
 });

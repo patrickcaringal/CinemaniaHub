@@ -1,4 +1,4 @@
-import {lazy} from 'react'
+import { lazy } from "react";
 // layout
 import FrontendLayout from "../layouts/FrontendLayout";
 
@@ -54,21 +54,33 @@ const LostPassword = lazy(() => import("../views/AuthPages/LostPassword"));
 
 // merchandise pages
 const IndexPage = lazy(() => import("../views/MerchandisePages/IndexPage"));
-const ShopCategoryPage = lazy(() => import("../views/MerchandisePages/ShopCategoryPage"));
+const ShopCategoryPage = lazy(() =>
+  import("../views/MerchandisePages/ShopCategoryPage")
+);
 const CartPage = lazy(() => import("../views/MerchandisePages/CartPage"));
-const CheckOutPage = lazy(() => import("../views/MerchandisePages/CheckoutPage"));
-const WishlistPage = lazy(() => import("../views/MerchandisePages/WishlistPage"));
+const CheckOutPage = lazy(() =>
+  import("../views/MerchandisePages/CheckoutPage")
+);
+const WishlistPage = lazy(() =>
+  import("../views/MerchandisePages/WishlistPage")
+);
 const TrackOrder = lazy(() => import("../views/MerchandisePages/TrackOrder"));
 const MyAccount = lazy(() => import("../views/MerchandisePages/my-account"));
 
 // view all page
 const ViewAll = lazy(() => import("../views/ViewAll"));
-const CommingSoonPage = lazy(() => import("../views/ExtraPages/CommingSoonPage"));
+const CommingSoonPage = lazy(() =>
+  import("../views/ExtraPages/CommingSoonPage")
+);
 const HomePage = lazy(() => import("../views/MainPages/IndexPage"));
 const RestrictedPage = lazy(() => import("../views/Movies/RestictedPage"));
-const RelatedMerchandisePage = lazy(() => import("../views/Movies/ReletedMerchandiesPage"));
+const RelatedMerchandisePage = lazy(() =>
+  import("../views/Movies/ReletedMerchandiesPage")
+);
 const VideoDetail = lazy(() => import("../views/VideosPage/DetailPage"));
-const ProductDetail = lazy(() => import("../views/MerchandisePages/ProductDetailPage"));
+const ProductDetail = lazy(() =>
+  import("../views/MerchandisePages/ProductDetailPage")
+);
 const WatchlistDetail = lazy(() => import("../views/WatchlistDetail"));
 const AllGenres = lazy(() => import("../views/AllGenres"));
 const AllProduct = lazy(() => import("../views/MerchandisePages/AllProduct"));
@@ -77,6 +89,7 @@ export const LandingpageRouter = [
   {
     path: "/",
     element: <FrontendLayout HeaderMega="true" FooterCompact="true" />,
+    errorElement: <>Not Found</>,
     children: [
       {
         path: "",
@@ -232,64 +245,64 @@ export const LandingpageRouter = [
       },
     ],
   },
-  {
-    path: "/",
-    element: (
-      <FrontendLayout HeaderMerchandise="true" FooterMerchandise="true" />
-    ),
-    children: [
-      {
-        path: "/merchandise-store",
-        element: <IndexPage />,
-      },
-      {
-        path: "/shop",
-        element: <ShopCategoryPage />,
-      },
-      {
-        path: "/cart",
-        element: <CartPage />,
-      },
-      {
-        path: "/checkout",
-        element: <CheckOutPage />,
-      },
-      {
-        path: "/wishlist",
-        element: <WishlistPage />,
-      },
-      {
-        path: "/track-order",
-        element: <TrackOrder />,
-      },
-      {
-        path: "/account",
-        element: <MyAccount />,
-      },
-    ],
-  },
-  {
-    path: "/coming-soon",
-    element: <CommingSoonPage />,
-  },
-  {
-    path: "/error-page-one",
-    element: <ErrorPage1 />,
-  },
-  {
-    path: "/error-page-two",
-    element: <ErrorPage2 />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/lost-password",
-    element: <LostPassword />,
-  },
+  // {
+  //   path: "/",
+  //   element: (
+  //     <FrontendLayout HeaderMerchandise="true" FooterMerchandise="true" />
+  //   ),
+  //   children: [
+  //     {
+  //       path: "/merchandise-store",
+  //       element: <IndexPage />,
+  //     },
+  //     {
+  //       path: "/shop",
+  //       element: <ShopCategoryPage />,
+  //     },
+  //     {
+  //       path: "/cart",
+  //       element: <CartPage />,
+  //     },
+  //     {
+  //       path: "/checkout",
+  //       element: <CheckOutPage />,
+  //     },
+  //     {
+  //       path: "/wishlist",
+  //       element: <WishlistPage />,
+  //     },
+  //     {
+  //       path: "/track-order",
+  //       element: <TrackOrder />,
+  //     },
+  //     {
+  //       path: "/account",
+  //       element: <MyAccount />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: "/coming-soon",
+  //   element: <CommingSoonPage />,
+  // },
+  // {
+  //   path: "/error-page-one",
+  //   element: <ErrorPage1 />,
+  // },
+  // {
+  //   path: "/error-page-two",
+  //   element: <ErrorPage2 />,
+  // },
+  // {
+  //   path: "/login",
+  //   element: <LoginPage />,
+  // },
+  // {
+  //   path: "/register",
+  //   element: <SignUpPage />,
+  // },
+  // {
+  //   path: "/lost-password",
+  //   element: <LostPassword />,
+  // },
 ];

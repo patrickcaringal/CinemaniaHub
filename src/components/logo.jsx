@@ -13,7 +13,7 @@ const Logo = memo(() => {
   return (
     <Fragment>
       <div className="logo-default">
-        <Link className="navbar-brand text-primary" to="/home">
+        <Link className="navbar-brand text-primary" to="/">
           <img
             className="img-fluid logo"
             src={img1}
@@ -23,7 +23,7 @@ const Logo = memo(() => {
         </Link>
       </div>
       <div className="logo-hotstar">
-        <Link className="navbar-brand text-primary" to="/home">
+        <Link className="navbar-brand text-primary" to="/">
           <img
             className="img-fluid logo"
             src={hostar}
@@ -33,7 +33,7 @@ const Logo = memo(() => {
         </Link>
       </div>
       <div className="logo-prime">
-        <Link className="navbar-brand text-primary" to="/home">
+        <Link className="navbar-brand text-primary" to="/">
           <img
             className="img-fluid logo"
             src={prime}
@@ -43,7 +43,7 @@ const Logo = memo(() => {
         </Link>
       </div>
       <div className="logo-hulu">
-        <Link className="navbar-brand text-primary" to="/home">
+        <Link className="navbar-brand text-primary" to="/">
           <img
             className="img-fluid logo"
             src={hulu}

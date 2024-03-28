@@ -21,16 +21,23 @@ const HomePage = memo(() => {
   return (
     <Fragment>
       <OttHeroSlider />
-      <ContinueWatching />
+
+      {/* NOTE: section not needed */}
+      {/* <ContinueWatching /> */}
+
       <TopTenMoviesToWatch />
-      <OnlyOnStreamit />
+
+      {/* NOTE: section not needed */}
+      {/* <OnlyOnStreamit /> */}
       <VerticalSectionSlider sliderData={ottVerticleLatestMovies} />
-      <YourFavouritePersonality />
+
+      {/* <YourFavouritePersonality /> */}
+
       <PopularMovies />
       <TabSlider />
       <GenreSlider />
       <RecommendedForYou />
-      <TopPicsForYou />
+      {/* <TopPicsForYou /> */}
     </Fragment>
   );
 });
