@@ -53,6 +53,7 @@ const FrontendLayout = memo((props) => {
       ) : (
         <FooterDefault />
       )} */}
+      <FooterDefault />
       <div
         id="back-to-top"
         style={{ display: "none" }}
