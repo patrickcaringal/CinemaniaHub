@@ -1,19 +1,21 @@
 import useData from "./useData";
 import { embedGenreNames } from "../helpers/genre";
 
-const useTrending = ({ entity = "all" }) => {
+const useDiscover = ({ entity = "movie", queryParams = {} }) => {
   const { data, ...rest } = useData(
-    `/trending/${entity}/day`,
+    `/discover/${entity}`,
     {
       params: {
         language: "en-US",
+        ...queryParams,
       },
     },
     []
   );
 
-  const transformedData = embedGenreNames(undefined, data);
+  const transformedData = embedGenreNames(entity, data);
 
   return { data: transformedData, ...rest };
 };
-export default useTrending;
+
+export default useDiscover;

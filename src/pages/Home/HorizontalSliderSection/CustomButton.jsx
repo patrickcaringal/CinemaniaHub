@@ -1,4 +1,4 @@
-import React, { memo, Fragment } from "react";
+import { memo, Fragment } from "react";
 
 // react-router-dom
 import { Link } from "react-router-dom";

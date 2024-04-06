@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 
-const VerticalSectionSlider = memo(({ data = [], error, isLoading }) => {
+const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   if (isLoading || error) return null;
@@ -123,7 +123,7 @@ const VerticalSectionSlider = memo(({ data = [], error, isLoading }) => {
                     <div className="description">
                       <div className="block-description">
                         <ul className="ps-0 mb-0 mb-1 pb-1 list-inline d-flex flex-wrap align-items-center movie-tag">
-                          {i.genre_ids.map((genre) => (
+                          {i.genres.map((genre) => (
                             <li
                               key={genre}
                               className="position-relative text-capitalize font-size-14 letter-spacing-1"
@@ -179,5 +179,5 @@ const VerticalSectionSlider = memo(({ data = [], error, isLoading }) => {
   );
 });
 
-VerticalSectionSlider.displayName = "VerticalSectionSlider";
-export default VerticalSectionSlider;
+VerticalSliderSection.displayName = "VerticalSliderSection";
+export default VerticalSliderSection;

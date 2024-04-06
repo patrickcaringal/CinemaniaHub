@@ -1,19 +1,13 @@
 import { memo, Fragment } from "react";
 // hero slider
-import OttHeroSlider from "./OttHeroSlider";
-import VerticalSectionSlider from "./VerticalSectionSlider";
+import HorizontalSlider from "./HorizontalSliderSection/HorizontalSlider";
+import VerticalSectionSlider from "./VerticalSliderSection";
 import GenreSlider from "./GenreSection/GenreSlider";
 
 // sections
-import TopTenMoviesToWatch from "../../components/sections/TopTenMoviesToWatch";
-import PopularMovies from "../../components/sections/PopularMovies";
-import TabSlider from "../../components/sections/TabSlider";
-import RecommendedForYou from "../../components/sections/RecommendedForYou";
-import { useGenres, useTrending } from "../../hooks";
-import Loader from "../../components/Loader";
-
-//static data
-import { ottVerticleLatestMovies } from "../../StaticData/data";
+import TopTenMoviesToWatch from "./TopTenMoviesSection/TopTenMoviesToWatch";
+import PopularTvSeries from "./PopularTvSeriesSection/PopularTvSeries";
+import { useGenres, useTrending, useDiscover } from "../../hooks";
 
 const HomePage = memo(() => {
   const {
@@ -22,10 +16,32 @@ const HomePage = memo(() => {
     isLoading: trendingLoading,
   } = useTrending({ entity: "all" });
   const { data: genreData } = useGenres({ entity: "movie" });
+  const {
+    data: topMovieData,
+    error: topMovieError,
+    isLoading: topMovieLoading,
+  } = useDiscover({
+    entity: "movie",
+    queryParams: {
+      "primary_release_date.gte": "2023-01-01",
+      sort_by: "vote_count.desc",
+    },
+  });
+
+  const {
+    data: popularTvSeriesData,
+    error: popularTvSeriesError,
+    isLoading: popularTvSeriesLoading,
+  } = useDiscover({
+    entity: "tv",
+    queryParams: {
+      sort_by: "vote_count.desc",
+    },
+  });
 
   return (
     <Fragment>
-      <OttHeroSlider
+      <HorizontalSlider
         data={trendingData.slice(0, 10)}
         error={trendingError}
         isLoading={trendingLoading}
@@ -34,10 +50,15 @@ const HomePage = memo(() => {
       {/* NOTE: section not needed */}
       {/* <ContinueWatching /> */}
 
-      <TopTenMoviesToWatch />
+      <TopTenMoviesToWatch
+        data={topMovieData.slice(0, 10)}
+        error={topMovieError}
+        isLoading={topMovieLoading}
+      />
 
       {/* NOTE: section not needed */}
       {/* <OnlyOnStreamit /> */}
+
       <VerticalSectionSlider
         data={trendingData.slice(11, 20)}
         error={trendingError}
@@ -46,10 +67,15 @@ const HomePage = memo(() => {
 
       {/* <YourFavouritePersonality /> */}
 
-      <PopularMovies />
+      <PopularTvSeries
+        data={popularTvSeriesData.slice(0, 10)}
+        error={popularTvSeriesError}
+        isLoading={popularTvSeriesLoading}
+      />
+
       {/* <TabSlider /> */}
       <GenreSlider data={genreData.slice(0, 10)} />
-      <RecommendedForYou />
+      {/* <RecommendedForYou /> */}
       {/* <TopPicsForYou /> */}
     </Fragment>
   );

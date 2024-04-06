@@ -1,4 +1,4 @@
-import React, { memo, Fragment, useState } from "react";
+import { memo, Fragment, useState } from "react";
 
 // react-router-dom
 import { Link } from "react-router-dom";
@@ -10,12 +10,7 @@ import CustomButton from "./CustomButton";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 
-// Redux Selector / Action
-import { useSelector } from "react-redux";
-import { theme_scheme_direction } from "../../store/setting/selectors";
-
-const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
-  const themeSchemeDirection = useSelector(theme_scheme_direction);
+const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   if (isLoading || error) return null;
@@ -32,8 +27,6 @@ const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
               >
                 <div className="banner-thumb-slider-nav">
                   <Swiper
-                    key={themeSchemeDirection}
-                    dir={themeSchemeDirection}
                     tag="ul"
                     thumbs={{
                       swiper:
@@ -77,7 +70,9 @@ const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
                               <h6 className="iq-title fw-500 mb-0">
                                 {i.title || i.name}
                               </h6>
-                              <span className="fs-12">2 hr 6 minute</span>
+                              <span className="fs-12 line-count-1">
+                                {i.genres.join(", ")}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -95,8 +90,6 @@ const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
             </div>
             <div className="slider-images" data-swiper="slider-images-ott">
               <Swiper
-                key={themeSchemeDirection}
-                dir={themeSchemeDirection}
                 tag="ul"
                 onSwiper={setThumbsSwiper}
                 slidesPerView={1}
@@ -124,7 +117,7 @@ const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
                                 Pg
                               </span> */}
                               <ul className="p-0 mb-0 list-inline d-flex flex-wrap align-items-center movie-tag">
-                                {i.genre_ids.map((genre) => (
+                                {i.genres.map((genre) => (
                                   <li
                                     key={genre}
                                     className="position-relative text-capitalize font-size-14 letter-spacing-1"
@@ -211,5 +204,5 @@ const OttHeroSlider = memo(({ data = [], error, isLoading }) => {
   );
 });
 
-OttHeroSlider.displayName = OttHeroSlider;
-export default OttHeroSlider;
+HorizontalSlider.displayName = HorizontalSlider;
+export default HorizontalSlider;
