@@ -12,7 +12,7 @@ const LatestEpisodes = lazy(() => import("../views/TvShows/EpisodePage"));
 
 // movies pages
 const MoviePage = lazy(() => import("../views/MainPages/MoviesPage"));
-const MovieDetail = lazy(() => import("../views/Movies/DetailPage"));
+const MovieDetail = lazy(() => import("../pages/MovieDetail/DetailPage"));
 
 // videos pages
 const VideoList = lazy(() => import("../views/MainPages/VideosPage"));
@@ -104,7 +104,7 @@ export const LandingpageRouter = [
         element: <MoviePage />,
       },
       {
-        path: "/movies-detail",
+        path: "/movie/:id",
         element: <MovieDetail />,
       },
       {
@@ -112,9 +112,13 @@ export const LandingpageRouter = [
         element: <TvShowsList />,
       },
       {
-        path: "/shows-details",
-        element: <TvShowsDetail />,
+        path: "/tv/:id",
+        element: <MovieDetail />,
       },
+      // {
+      //   path: "/shows-details",
+      //   element: <TvShowsDetail />,
+      // },
       {
         path: "/episodes",
         element: <LatestEpisodes />,

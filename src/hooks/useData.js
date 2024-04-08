@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
 const useData = (endpoint, requestConfig = {}, deps = []) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(undefined);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -14,7 +14,7 @@ const useData = (endpoint, requestConfig = {}, deps = []) => {
     apiClient
       .get(endpoint, { signal: controller.signal, ...requestConfig })
       .then((res) => {
-        setData(res.data.results);
+        setData(res.data);
         setLoading(false);
       })
       .catch((err) => {

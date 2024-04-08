@@ -7,7 +7,7 @@ export const findGenre = (entity, id) => {
   return genre;
 };
 
-export const embedGenreNames = (entity = "none", data) => {
+export const embedGenreNames = (entity = "none", data = []) => {
   const isEntityUndefined = entity === "none";
 
   const result = data.map((i) => {

@@ -2,7 +2,7 @@ import useData from "./useData";
 import { embedGenreNames } from "../helpers/genre";
 
 const useTrending = ({ entity = "all" }) => {
-  const { data, ...rest } = useData(
+  const { data = [], ...rest } = useData(
     `/trending/${entity}/day`,
     {
       params: {
@@ -12,7 +12,7 @@ const useTrending = ({ entity = "all" }) => {
     []
   );
 
-  const transformedData = embedGenreNames(undefined, data);
+  const transformedData = embedGenreNames(undefined, data.results);
 
   return { data: transformedData, ...rest };
 };

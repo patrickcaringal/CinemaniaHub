@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 // components
 import CustomButton from "./CustomButton";
+import { detailPath } from "../../../services";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -187,7 +188,7 @@ const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
                           </div>
                           <CustomButton
                             buttonTitle="play now"
-                            link="/movies-detail"
+                            link={detailPath(i.media_type, i.id)}
                             linkButton="false"
                           />
                         </div>

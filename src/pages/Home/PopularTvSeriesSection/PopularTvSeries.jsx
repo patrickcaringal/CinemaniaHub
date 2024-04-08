@@ -3,6 +3,7 @@ import { Fragment, memo } from "react";
 //componets
 import SectionSlider from "../TopTenMoviesSection/SectionSlider";
 import CardStyle from "./CardStyle";
+import { detailPath } from "../../../services";
 
 const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
   if (isLoading || error) return null;
@@ -20,7 +21,7 @@ const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
             title={i.title || i.name}
             genres={i.genres}
             watchlistLink="/playlist"
-            link="/movies-detail"
+            link={detailPath("tv", i.id)}
           />
         )}
       </SectionSlider>

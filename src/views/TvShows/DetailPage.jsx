@@ -21,8 +21,6 @@ import { useEnterExit } from "../../utilities/usePage";
 import { Navigation } from "swiper";
 
 const TvShowsDetail = memo(() => {
- 
-
   useEnterExit();
   // date, type
   const shows = {

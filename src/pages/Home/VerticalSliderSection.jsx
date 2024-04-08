@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 //swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
+import { detailPath } from "../../services";
 
 const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -68,8 +69,7 @@ const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
                           </div>
                           <div className="block-description">
                             <h6 className="iq-title">
-                              <Link to="/shows-details">
-                                {" "}
+                              <Link to={detailPath(i.media_type, i.id)}>
                                 {i.title || i.name}
                               </Link>
                             </h6>
@@ -138,7 +138,9 @@ const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
                           ))}
                         </ul>
                         <h2 className="iq-title mb-3">
-                          <Link to="/shows-details">{i.title || i.name}</Link>
+                          <Link to={detailPath(i.media_type, i.id)}>
+                            {i.title || i.name}
+                          </Link>
                         </h2>
                         <div className="d-flex align-items-center gap-3 mb-3">
                           <div className="slider-ratting d-flex align-items-center">
@@ -159,7 +161,7 @@ const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
                         <p className="mt-0 mb-3 line-count-3">{i.overview}</p>
                         <div className="iq-button">
                           <Link
-                            to="/movies-detail"
+                            to={detailPath(i.media_type, i.id)}
                             className="btn text-uppercase position-relative"
                           >
                             <span className="button-text">play now</span>
