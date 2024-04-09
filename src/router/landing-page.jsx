@@ -4,6 +4,7 @@ import FrontendLayout from "../layouts/FrontendLayout";
 
 // pages
 const OTTPage = lazy(() => import("../pages/Home/HomePage"));
+const OTTPage2 = lazy(() => import("../views/MainPages/OTTPage"));
 
 // tv-shows pages
 const TvShowsList = lazy(() => import("../views/MainPages/TvShowsPage"));
@@ -98,6 +99,10 @@ export const LandingpageRouter = [
       // {
       //   path: "/home",
       //   element: <HomePage />,
+      // },
+      // {
+      //   path: "/home2",
+      //   element: <OTTPage2 />,
       // },
       {
         path: "/movies",

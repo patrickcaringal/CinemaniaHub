@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import ReviewComponent from "../../components/ReviewComponent";
 import Sources from "../../components/Sources";
 import MoviesRecommendedForYou from "../../components/sections/MoviesRecommendedForYou";
+import Collections from "./Collections";
 import RelatedVideos from "../../components/sections/RelatedVideos";
 import UpcomingMovies from "../../components/sections/UpcomingMovies";
 import RelatedMovies from "../../components/sections/RelatedMovies";
@@ -18,6 +19,7 @@ import FsLightBox from "../../components/fslight-box";
 import RatingStar from "../../components/rating-star";
 import VideoJS from "../../components/plugins/VideoJs";
 import { formatRuntime } from "../../helpers/movie";
+import SectionSlider from "../Home/TopTenMoviesSection/SectionSlider";
 
 //function
 import { generateImgPath } from "../../StaticData/data";
@@ -32,8 +34,14 @@ import { useMovieDetail } from "../../hooks";
 
 const MovieDetail = memo(() => {
   const params = useParams();
+  const { data, error, isLoading } = useMovieDetail({
+    id: params?.id,
+    queryParams: {
+      append_to_response: "credits,collections",
+    },
+  });
 
-  const { data, error, isLoading } = useMovieDetail({ id: params?.id });
+  // &append_to_response=credits
 
   // date, type
   const shows = {
@@ -191,57 +199,61 @@ const MovieDetail = memo(() => {
   // };
   if (!data || isLoading || error) return null;
 
+  const { credits, belongs_to_collection } = data;
+  const { cast } = credits;
+
   return (
     <Fragment>
-      <Container fluid>
-        <div className="tv-show-detail">
-          <div
-            className="overlay-wrapper iq-main-slider"
-            style={{
-              background: `linear-gradient(to right, rgba(31, 36, 33, 1) 5%, rgba(27, 38, 52, 0.7) 100%), url(https://image.tmdb.org/t/p/original/${data.backdrop_path}}`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "cover",
-            }}
-          >
-            <div className="banner-caption">
-              <Row>
-                <Col lg="3" md="5">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/w342/${data.poster_path}`}
-                    rounded
-                  />
-                </Col>
-                <Col lg="9" md="7" className="pe-5">
-                  <div className="trending-info ">
-                    <h1 className="texture-text big-font text-uppercase mt-2">
-                      {data.title || data.name}
-                    </h1>
+      {true && (
+        <Container fluid>
+          <div className="tv-show-detail">
+            <div
+              className="overlay-wrapper iq-main-slider"
+              style={{
+                background: `linear-gradient(to right, rgba(31, 36, 33, 1) 5%, rgba(27, 38, 52, 0.7) 100%), url(https://image.tmdb.org/t/p/original/${data.backdrop_path}}`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
+              }}
+            >
+              <div className="banner-caption">
+                <Row>
+                  <Col lg="3" md="5">
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w342/${data.poster_path}`}
+                      rounded
+                    />
+                  </Col>
+                  <Col lg="9" md="7" className="pe-5">
+                    <div className="trending-info ">
+                      <h1 className="texture-text big-font text-uppercase mt-2">
+                        {data.title || data.name}
+                      </h1>
 
-                    <ul className="p-0 m-0 list-inline d-flex flex-wrap movie-tag  mb-3">
-                      {data?.genres.map((item, index) => {
-                        return (
-                          <li className="trending-list" key={index}>
-                            <Link
-                              to="/view-all"
-                              className="text-primary text-uppercase font-size-18"
-                            >
-                              {item.name}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
+                      <ul className="p-0 m-0 list-inline d-flex flex-wrap movie-tag  mb-3">
+                        {data?.genres.map((item, index) => {
+                          return (
+                            <li className="trending-list" key={index}>
+                              <Link
+                                to="/view-all"
+                                className="text-primary text-uppercase font-size-18"
+                              >
+                                {item.name}
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
 
-                    <div className="d-flex flex-wrap align-items-center mb-3">
-                      <div className="d-flex flex-wrap align-items-center gap-3 font-size-20 fw-500 text-white">
-                        <span>
-                          {dayjs(data.release_date).format("MMM DD, YYYY")}
-                        </span>
-                        <span>{formatRuntime(data.runtime)}</span>
+                      <div className="d-flex flex-wrap align-items-center mb-3">
+                        <div className="d-flex flex-wrap align-items-center gap-3 font-size-20 fw-500 text-white">
+                          <span>
+                            {dayjs(data.release_date).format("MMM DD, YYYY")}
+                          </span>
+                          <span>{formatRuntime(data.runtime)}</span>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* <div className="ratting-start p-0 mb-4 list-inline text-warning d-flex align-items-center justify-content-left">
+                      {/* <div className="ratting-start p-0 mb-4 list-inline text-warning d-flex align-items-center justify-content-left">
                       <RatingStar
                         count="4"
                         count1="1"
@@ -251,55 +263,55 @@ const MovieDetail = memo(() => {
                         {data.vote_average}
                       </span>
                     </div> */}
-                    <p className="line-count-5 my-3 me-5">{data.overview}</p>
+                      <p className="line-count-5 my-3 me-5">{data.overview}</p>
 
-                    <div className="d-flex align-items-center flex-wrap gap-4 mb-4">
-                      <ul className="list-inline p-0 m-0 share-icons music-play-lists mb-n2 mx-n2">
-                        <li className="share">
-                          <span>
-                            <i className="fa-solid fa-share-nodes"></i>
-                          </span>
-                          <div className="share-box">
-                            <svg
-                              width="15"
-                              height="40"
-                              viewBox="0 0 15 40"
-                              className="share-shape"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                clipRule="evenodd"
-                                d="M14.8842 40C6.82983 37.2868 1 29.3582 1 20C1 10.6418 6.82983 2.71323 14.8842 0H0V40H14.8842Z"
-                                fill="#191919"
-                              ></path>
-                            </svg>
-                            <div className="d-flex align-items-center">
-                              <Link to="#" className="share-ico">
-                                <i className="fa-brands fa-facebook-f"></i>
-                              </Link>
-                              <Link to="#" className="share-ico">
-                                <i className="fa-brands fa-twitter"></i>
-                              </Link>
-                              <Link to="#" className="share-ico">
-                                <i className="fa-solid fa-link"></i>
-                              </Link>
+                      <div className="d-flex align-items-center flex-wrap gap-4 mb-4">
+                        <ul className="list-inline p-0 m-0 share-icons music-play-lists mb-n2 mx-n2">
+                          <li className="share">
+                            <span>
+                              <i className="fa-solid fa-share-nodes"></i>
+                            </span>
+                            <div className="share-box">
+                              <svg
+                                width="15"
+                                height="40"
+                                viewBox="0 0 15 40"
+                                className="share-shape"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  clipRule="evenodd"
+                                  d="M14.8842 40C6.82983 37.2868 1 29.3582 1 20C1 10.6418 6.82983 2.71323 14.8842 0H0V40H14.8842Z"
+                                  fill="#191919"
+                                ></path>
+                              </svg>
+                              <div className="d-flex align-items-center">
+                                <Link to="#" className="share-ico">
+                                  <i className="fa-brands fa-facebook-f"></i>
+                                </Link>
+                                <Link to="#" className="share-ico">
+                                  <i className="fa-brands fa-twitter"></i>
+                                </Link>
+                                <Link to="#" className="share-ico">
+                                  <i className="fa-solid fa-link"></i>
+                                </Link>
+                              </div>
                             </div>
-                          </div>
-                        </li>{" "}
-                        <li>
-                          <span>
-                            <i className="fa-solid fa-heart"></i>
-                          </span>
-                        </li>{" "}
-                        <li>
-                          <span>
-                            <i className="fa-solid fa-plus"></i>
-                          </span>
-                        </li>
-                      </ul>
-                      {/* <div className="movie-detail-select">
+                          </li>{" "}
+                          <li>
+                            <span>
+                              <i className="fa-solid fa-heart"></i>
+                            </span>
+                          </li>{" "}
+                          <li>
+                            <span>
+                              <i className="fa-solid fa-plus"></i>
+                            </span>
+                          </li>
+                        </ul>
+                        {/* <div className="movie-detail-select">
                 <Form.Select name="movieselect" className="form-select ">
                   <option value="1">Playlist</option>
                   <option value="2">Zombie Island</option>
@@ -307,11 +319,11 @@ const MovieDetail = memo(() => {
                   <option value="4">Jumbo Queen</option>
                 </Form.Select>
               </div> */}
+                      </div>
                     </div>
-                  </div>
-                </Col>
+                  </Col>
 
-                {/* <div className="position-relative my-4">
+                  {/* <div className="position-relative my-4">
               <Link to="/episodes" className="d-flex align-items-center gap-3">
                 <div className="play-button">
                   <i className="fa-solid fa-play"></i>
@@ -320,7 +332,7 @@ const MovieDetail = memo(() => {
               </Link>
             </div> */}
 
-                {/* <ul className="iq-blogtag list-unstyled d-flex flex-wrap align-items-center gap-3 p-0">
+                  {/* <ul className="iq-blogtag list-unstyled d-flex flex-wrap align-items-center gap-3 p-0">
               <li className="iq-tag-title text-primary mb-0">
                 <i className="fa fa-tags" aria-hidden="true"></i> Tags:{" "}
               </li>
@@ -335,181 +347,54 @@ const MovieDetail = memo(() => {
                 );
               })}
             </ul> */}
-              </Row>
+                </Row>
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
-      <div className="cast-tabs section-padding-top">
-        <Container fluid>
-          <div className="content-details trending-info g-border iq-rtl-direction">
-            <Tab.Container defaultActiveKey="first">
-              <Nav className="iq-custom-tab tab-bg-fill d-flex nav nav-pills mb-5 ">
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="first"
-                    variant=" d-flex align-items-center"
-                    id="nav-cast-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#nav-cast"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-cast"
-                    aria-selected="true"
-                  >
-                    Cast
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link
-                    eventKey="second"
-                    variant=""
-                    id="nav-crew-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#nav-crew"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-crew"
-                    aria-selected="false"
-                  >
-                    Crew
-                  </Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content>
-                <Tab.Pane
-                  className=" fade show"
-                  eventKey="first"
-                  id="nav-cast"
-                  role="tabpanel"
-                  aria-labelledby="nav-cast-tab"
-                >
-                  <Swiper
-                    slidesPerView={5}
-                    loop={false}
-                    modules={[Navigation]}
-                    tag="ul"
-                    className="position-relative swiper-card list-inline"
-                    breakpoints={{
-                      0: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                      },
-                      576: {
-                        slidesPerView: 2,
-                        spaceBetween: 0,
-                      },
-                      768: {
-                        slidesPerView: 3,
-                        spaceBetween: 0,
-                      },
-                      1025: {
-                        slidesPerView: 5,
-                        spaceBetween: 0,
-                      },
-                      1500: {
-                        slidesPerView: 5,
-                        spaceBetween: 0,
-                      },
-                    }}
-                  >
-                    {shows.cast.map((item, index) => {
-                      return (
-                        <SwiperSlide key={index} as="li">
-                          <Row className="cast-images m-0 align-items-center position-relative">
-                            <Col className="col-4 img-box p-0">
-                              <img
-                                src={item.thumbnail}
-                                alt="cast-1"
-                                className="img-fluid"
-                                loading="lazy"
-                              />
-                            </Col>
-                            <Col className="col-8 block-description">
-                              <h6 className="iq-title">
-                                <Link to="/cast-detail">{item.title}</Link>
-                              </h6>
-                              <div className="video-time d-flex align-items-center my-2">
-                                <small className="text-white">{item.as}</small>
-                              </div>
-                            </Col>
-                          </Row>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-                </Tab.Pane>
-                <Tab.Pane
-                  className=" fade"
-                  id="nav-crew"
-                  eventKey="second"
-                  role="tabpanel"
-                  aria-labelledby="nav-crew-tab"
-                >
-                  <Swiper
-                    slidesPerView={5}
-                    loop={false}
-                    modules={[Navigation]}
-                    tag="ul"
-                    className="position-relative swiper-card list-inline"
-                    breakpoints={{
-                      0: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                      },
-                      576: {
-                        slidesPerView: 2,
-                        spaceBetween: 0,
-                      },
-                      768: {
-                        slidesPerView: 3,
-                        spaceBetween: 0,
-                      },
-                      1025: {
-                        slidesPerView: 5,
-                        spaceBetween: 0,
-                      },
-                      1500: {
-                        slidesPerView: 5,
-                        spaceBetween: 0,
-                      },
-                    }}
-                  >
-                    {shows.crew.map((item, index) => {
-                      return (
-                        <SwiperSlide key={index} as="li">
-                          <Row className="cast-images m-0 align-items-center position-relative">
-                            <div className="col-4 img-box p-0">
-                              <img
-                                src={item.thumbnail}
-                                alt="cast-1"
-                                className="img-fluid"
-                                loading="lazy"
-                              />
-                            </div>
-                            <div className="col-8 block-description">
-                              <h6 className="iq-title">
-                                <Link to="/cast-detail">{item.title}</Link>
-                              </h6>
-                              <div className="video-time d-flex align-items-center my-2">
-                                <small className="text-white">{item.as}</small>
-                              </div>
-                            </div>
-                          </Row>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-                </Tab.Pane>
-              </Tab.Content>
-            </Tab.Container>
-          </div>
         </Container>
+      )}
+
+      <div className="cast-tabs mt-5">
+        <div className="content-details trending-info g-border iq-rtl-direction">
+          <SectionSlider
+            className="position-relative swiper-card list-inline"
+            title="Cast"
+            list={cast?.slice(0, 10)}
+            slidesPerView={4}
+            link="/all-genres"
+          >
+            {(item) => (
+              <SwiperSlide key={item.id} as="li">
+                <Row className="cast-images m-0 align-items-center position-relative">
+                  <Col className="col-4 img-box p-0">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w185/${item.profile_path}`}
+                      alt="cast-1"
+                      className="img-fluid"
+                      loading="lazy"
+                    />
+                  </Col>
+                  <Col className="col-8 block-description">
+                    <h6 className="iq-title">
+                      <Link to="/cast-detail">{item.original_name}</Link>
+                    </h6>
+                    <div className="video-time d-flex align-items-center my-2">
+                      <small className="text-white">{item.character}</small>
+                    </div>
+                  </Col>
+                </Row>
+              </SwiperSlide>
+            )}
+          </SectionSlider>
+        </div>
       </div>
-      <MoviesRecommendedForYou />
+
+      {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
+
+      {/* <MoviesRecommendedForYou />
       <RelatedMovies />
       <RelatedVideos />
-      <UpcomingMovies />
+      <UpcomingMovies /> */}
     </Fragment>
   );
 });
