@@ -8,12 +8,14 @@ const OTTPage2 = lazy(() => import("../views/MainPages/OTTPage"));
 
 // tv-shows pages
 const TvShowsList = lazy(() => import("../views/MainPages/TvShowsPage"));
-const TvShowsDetail = lazy(() => import("../views/TvShows/DetailPage"));
+const TvShowsDetailOld = lazy(() => import("../views/TvShows/DetailPage"));
+const TvShowsDetail = lazy(() => import("../pages/TvShowDetail/DetailPage"));
 const LatestEpisodes = lazy(() => import("../views/TvShows/EpisodePage"));
 
 // movies pages
 const MoviePage = lazy(() => import("../views/MainPages/MoviesPage"));
 const MovieDetail = lazy(() => import("../pages/MovieDetail/DetailPage"));
+const MovieDetail2 = lazy(() => import("../views/Movies/DetailPage"));
 
 // videos pages
 const VideoList = lazy(() => import("../views/MainPages/VideosPage"));
@@ -96,14 +98,14 @@ export const LandingpageRouter = [
         path: "",
         element: <OTTPage />,
       },
-      // {
-      //   path: "/home",
-      //   element: <HomePage />,
-      // },
-      // {
-      //   path: "/home2",
-      //   element: <OTTPage2 />,
-      // },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
+      {
+        path: "/home2",
+        element: <OTTPage2 />,
+      },
       {
         path: "/movies",
         element: <MoviePage />,
@@ -113,17 +115,23 @@ export const LandingpageRouter = [
         element: <MovieDetail />,
       },
       {
-        path: "/tv-shows",
-        element: <TvShowsList />,
+        path: "/movie-detail",
+        element: <MovieDetail2 />,
       },
       {
         path: "/tv/:id",
-        element: <MovieDetail />,
+        element: <TvShowsDetail />,
       },
-      // {
-      //   path: "/shows-details",
-      //   element: <TvShowsDetail />,
-      // },
+      {
+        path: "/shows-details",
+        element: <TvShowsDetailOld />,
+      },
+
+      {
+        path: "/tv-shows",
+        element: <TvShowsList />,
+      },
+
       {
         path: "/episodes",
         element: <LatestEpisodes />,
@@ -251,6 +259,10 @@ export const LandingpageRouter = [
       {
         path: "/product-detail",
         element: <ProductDetail />,
+      },
+      {
+        path: "/merchandise-store",
+        element: <IndexPage />,
       },
     ],
   },

@@ -1,6 +1,6 @@
 import useData from "./useData";
 
-const useMovieDetail = ({ id = "all", queryParams = {} }) => {
+const useMovieDetail = ({ id = "", queryParams = {} }, deps = []) => {
   const params = {
     params: {
       language: "en-US",
@@ -8,7 +8,7 @@ const useMovieDetail = ({ id = "all", queryParams = {} }) => {
     },
   };
 
-  const res = useData(`/movie/${id}`, params, []);
+  const res = useData(`/movie/${id}`, params, deps);
 
   return res;
 };

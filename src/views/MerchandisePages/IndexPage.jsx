@@ -12,7 +12,7 @@ import Logo from "../../components/logo";
 import CustomButton from "../../components/CustomButton";
 
 //data
-import { heroSlider, newProduct, category, } from "../../StaticData/shop";
+import { heroSlider, newProduct, category } from "../../StaticData/shop";
 
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -113,7 +113,7 @@ const IndexPage = memo(() => {
             slidesPerView={4}
             tag="ul"
             className="position-relative swiper-card "
-          // wrapperClass="p-0 m-0  list-inline"
+            // wrapperClass="p-0 m-0  list-inline"
           >
             {category.map((item, index) => {
               return (
@@ -141,7 +141,8 @@ const IndexPage = memo(() => {
                 <div
                   className="card-img-overlay product-card-img-overlay"
                   style={{
-                    backgroundImage: "url(assets/images/shop/card/01.webp)",
+                    backgroundImage:
+                      "url(https://image.tmdb.org/t/p/w342/8ohejkcQkNgkJgLn71Ws6Kd35g0.jpg)",
                   }}
                 ></div>
                 <div className="card-body w-100">
@@ -418,8 +419,8 @@ const IndexPage = memo(() => {
             </div>
             <div className="card-style-slider">
               <Swiper
-      key={themeSchemeDirection}
-      dir={themeSchemeDirection}
+                key={themeSchemeDirection}
+                dir={themeSchemeDirection}
                 slidesPerView={5}
                 navigation={{
                   prevEl: ".swiper-button-prev",

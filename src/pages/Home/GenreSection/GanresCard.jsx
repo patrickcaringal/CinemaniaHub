@@ -14,18 +14,20 @@ const GenersCard = memo((props) => {
               alt="geners-img"
               className="img-fluid object-cover w-100 rounded"
             />
-            <div className="blog-description">
-              <h6 className="mb-0 iq-title">
-                <Link
-                  to={{
-                    pathname: "/view-all",
-                  }}
-                  className="text-decoration-none text-capitalize line-count-2 p-2"
-                >
-                  {props.title}
-                </Link>
-              </h6>
-            </div>
+            {props.title && (
+              <div className="blog-description">
+                <h6 className="mb-0 iq-title">
+                  <Link
+                    to={{
+                      pathname: "/view-all",
+                    }}
+                    className="text-decoration-none text-capitalize line-count-2 p-2"
+                  >
+                    {props.title}
+                  </Link>
+                </h6>
+              </div>
+            )}
           </div>
         </div>
       </div>

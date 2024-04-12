@@ -1,5 +1,4 @@
 import React, { Fragment, memo } from "react";
-import * as dayjs from "dayjs";
 
 //react-bootstrap
 import { Row, Col, Container, Image } from "react-bootstrap";
@@ -11,24 +10,20 @@ import { Link, useParams } from "react-router-dom";
 import Collections from "./Collections";
 import Recommendation from "./Recommendation";
 import ImagesSection from "./GenreSlider";
-import { formatRuntime } from "../../helpers/movie";
-import SectionSlider from "../Home/TopTenMoviesSection/SectionSlider";
-import RatingStar from "../../components/rating-star";
 import Casts from "./Casts";
+import RatingStar from "../../components/rating-star";
 
 //function
-import { generateImgPath } from "../../StaticData/data";
 
 //utilites
 import { useEnterExit } from "../../utilities/usePage";
 
 //swiper
-import { SwiperSlide } from "swiper/react";
-import { useMovieDetail } from "../../hooks";
+import { useTvShowDetail } from "../../hooks";
 
 const MovieDetail = memo(() => {
   const params = useParams();
-  const { data, error, isLoading } = useMovieDetail(
+  const { data, error, isLoading } = useTvShowDetail(
     {
       id: params?.id,
       queryParams: {
@@ -43,7 +38,7 @@ const MovieDetail = memo(() => {
 
   if (!data || isLoading || error) return null;
 
-  const { credits, belongs_to_collection, images } = data;
+  const { credits, images, seasons } = data;
   const { cast } = credits;
   const { backdrops } = images;
 
@@ -68,7 +63,7 @@ const MovieDetail = memo(() => {
                   />
                 </Col>
                 <Col lg="9" md="7" className="pe-5">
-                  <div className="trending-info ">
+                  <div className="trending-info">
                     <h1 className="texture-text big-font text-uppercase mt-2">
                       {data.title || data.name}
                     </h1>
@@ -98,10 +93,8 @@ const MovieDetail = memo(() => {
 
                     <div className="d-flex flex-wrap align-items-center mb-3">
                       <div className="d-flex flex-wrap align-items-center gap-3 font-size-20 fw-500 text-white">
-                        <span>
-                          {dayjs(data.release_date).format("MMM DD, YYYY")}
-                        </span>
-                        <span>{formatRuntime(data.runtime)}</span>
+                        <span>{data.number_of_seasons} Seasons</span>
+                        {/* <span>{data.number_of_episodes} Episodes</span> */}
                       </div>
                     </div>
 
@@ -206,7 +199,9 @@ const MovieDetail = memo(() => {
 
       <Casts data={cast?.slice(0, 10)} />
 
-      {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
+      {!!seasons.length && (
+        <Collections data={seasons.filter((i) => !!i.season_number)} />
+      )}
 
       {!!backdrops.length && (
         <ImagesSection
@@ -219,11 +214,6 @@ const MovieDetail = memo(() => {
       )}
 
       <Recommendation id={params?.id} />
-
-      {/* <MoviesRecommendedForYou />
-      <RelatedMovies />
-      <RelatedVideos />
-      <UpcomingMovies /> */}
     </Fragment>
   );
 });

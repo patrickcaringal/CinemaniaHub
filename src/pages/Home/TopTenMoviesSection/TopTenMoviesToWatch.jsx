@@ -8,8 +8,6 @@ import { detailPath } from "../../../services";
 const TopTenMoviesToWatch = memo(({ data = [], error, isLoading }) => {
   if (isLoading || error) return null;
 
-  console.log(data);
-
   return (
     <Fragment>
       <SectionSlider

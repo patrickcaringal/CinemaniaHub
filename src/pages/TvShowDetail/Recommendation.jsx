@@ -1,30 +1,30 @@
 import { Fragment, memo } from "react";
 
-//components
 import SectionSlider from "../../components/slider/SectionSlider";
 import CardStyle from "../../components/cards/CardStyle";
+import { detailPath } from "../../services";
 
-//static data
+import { useRecommendations } from "../../hooks";
 
-import { useCollection } from "../../hooks";
-
-const MoviesRecommendedForYou = memo(({ data }) => {
+const Recommendation = memo(({ id }) => {
+  const entity = "tv";
   const {
-    data: collectionData,
+    data: recommendData,
     error,
     isLoading,
-  } = useCollection({
-    id: data?.id,
+  } = useRecommendations({
+    entity,
+    id,
   });
 
-  if (!collectionData || isLoading || error) return null;
+  if (!recommendData || isLoading || error) return null;
 
   return (
     <Fragment>
       <SectionSlider
-        title={collectionData.name}
-        list={collectionData.parts.filter((i) => i.vote_count !== 0)}
-        className="recommended-block"
+        title="Recommendations"
+        list={recommendData}
+        className="related-movie-block"
         slidesPerView={6}
       >
         {(i) => (
@@ -32,7 +32,7 @@ const MoviesRecommendedForYou = memo(({ data }) => {
             image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
             title={i.title || i.name}
             watchlistLink="/playlist"
-            link="/movies-detail"
+            link={detailPath(entity, i.id)}
           />
         )}
       </SectionSlider>
@@ -40,5 +40,5 @@ const MoviesRecommendedForYou = memo(({ data }) => {
   );
 });
 
-MoviesRecommendedForYou.displayName = "MoviesRecommendedForYou";
-export default MoviesRecommendedForYou;
+Recommendation.displayName = "Recommendation";
+export default Recommendation;
