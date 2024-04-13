@@ -1,25 +1,18 @@
 import { Fragment, memo } from "react";
 
-//components
-import SectionSlider from "../../components/slider/SectionSlider";
-import GenersCard from "../Home/GenreSection/GanresCard";
+import { SectionSlider, GenresCard } from "../../common";
+import { tmdbImgPath } from "../../services";
 
 const GenreSlider = memo(({ data }) => {
   return (
     <Fragment>
       <SectionSlider
-        // className="movie-geners-block"
         title="Medias"
         list={data}
-        slidesPerView={6}
+        slidesPerView={4}
         link="/all-genres"
       >
-        {(i) => (
-          <GenersCard
-            image={`https://image.tmdb.org/t/p/w342/${i.file_path}`}
-            title={i.vote_count}
-          />
-        )}
+        {(i) => <GenresCard image={tmdbImgPath("w342", i.file_path)} />}
       </SectionSlider>
     </Fragment>
   );

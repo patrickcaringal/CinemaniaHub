@@ -1,9 +1,6 @@
 import { Fragment, memo, useState } from "react";
-
-//react-router-dom
 import { Link } from "react-router-dom";
 
-//swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
 import { detailPath } from "../../services";

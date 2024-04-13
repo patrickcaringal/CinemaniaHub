@@ -1,8 +1,7 @@
 import { Fragment, memo } from "react";
 
 //componets
-import SectionSlider from "../TopTenMoviesSection/SectionSlider";
-import CardStyle from "./CardStyle";
+import { SectionSlider, CardStyle } from "../../../common";
 import { detailPath } from "../../../services";
 
 const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
@@ -14,13 +13,13 @@ const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
         title="Popular TV Series"
         list={data}
         className="popular-movies-block streamit-block"
+        slidesPerView={6}
       >
         {(i) => (
           <CardStyle
             image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
             title={i.title || i.name}
-            genres={i.genres}
-            watchlistLink="/playlist"
+            subtitle={i.genres.join(", ")}
             link={detailPath("tv", i.id)}
           />
         )}

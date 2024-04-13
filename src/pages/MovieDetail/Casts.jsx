@@ -1,12 +1,12 @@
-import { Fragment, memo } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { memo } from "react";
+import { SwiperSlide } from "swiper/react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-//components
-import SectionSlider from "../../components/slider/SectionSlider";
+import { SectionSlider } from "../../common";
+import { tmdbImgPath } from "../../services";
 
-const GenreSlider = memo(({ data }) => {
+const Casts = memo(({ data }) => {
   return (
     <div className="cast-tabs mt-5">
       <div className="content-details trending-info g-border iq-rtl-direction">
@@ -18,11 +18,12 @@ const GenreSlider = memo(({ data }) => {
           link="/all-genres"
         >
           {(item) => (
+            // Cast Card component
             <SwiperSlide key={item.id} as="li">
               <Row className="cast-images m-0 align-items-center position-relative">
                 <Col className="col-4 img-box p-0">
                   <img
-                    src={`https://image.tmdb.org/t/p/w185/${item.profile_path}`}
+                    src={tmdbImgPath("w185", item.profile_path)}
                     alt="cast-1"
                     className="img-fluid"
                     loading="lazy"
@@ -45,5 +46,5 @@ const GenreSlider = memo(({ data }) => {
   );
 });
 
-GenreSlider.displayName = "GenreSlider";
-export default GenreSlider;
+Casts.displayName = "Casts";
+export default Casts;

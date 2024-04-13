@@ -1,3 +1,5 @@
+import * as dayjs from "dayjs";
+
 export const isMovie = (type) => type === "movie";
 
 export const formatRuntime = (num) => {
@@ -6,3 +8,5 @@ export const formatRuntime = (num) => {
 
   return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`;
 };
+
+export const formatDate = (date) => dayjs(date).format("MMM DD, YYYY");

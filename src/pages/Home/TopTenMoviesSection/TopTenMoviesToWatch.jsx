@@ -1,9 +1,7 @@
 import { memo, Fragment } from "react";
 
-//components
-import SectionSlider from "./SectionSlider";
-import TopTenCard from "./TopTenCard";
-import { detailPath } from "../../../services";
+import { SectionSlider, TopTenCard } from "../../../common";
+import { detailPath, tmdbImgPath } from "../../../services";
 
 const TopTenMoviesToWatch = memo(({ data = [], error, isLoading }) => {
   if (isLoading || error) return null;
@@ -17,7 +15,7 @@ const TopTenMoviesToWatch = memo(({ data = [], error, isLoading }) => {
       >
         {(i) => (
           <TopTenCard
-            imagePath={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+            imagePath={tmdbImgPath("w342", i.poster_path)}
             countValue={i.count}
             link={detailPath("movie", i.id)}
           />

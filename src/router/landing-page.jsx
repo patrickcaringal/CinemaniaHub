@@ -98,39 +98,39 @@ export const LandingpageRouter = [
         path: "",
         element: <OTTPage />,
       },
-      {
-        path: "/home",
-        element: <HomePage />,
-      },
-      {
-        path: "/home2",
-        element: <OTTPage2 />,
-      },
-      {
-        path: "/movies",
-        element: <MoviePage />,
-      },
+      // {
+      //   path: "/home",
+      //   element: <HomePage />,
+      // },
+      // {
+      //   path: "/home2",
+      //   element: <OTTPage2 />,
+      // },
+      // {
+      //   path: "/movies",
+      //   element: <MoviePage />,
+      // },
       {
         path: "/movie/:id",
         element: <MovieDetail />,
       },
-      {
-        path: "/movie-detail",
-        element: <MovieDetail2 />,
-      },
+      // {
+      //   path: "/movie-detail",
+      //   element: <MovieDetail2 />,
+      // },
       {
         path: "/tv/:id",
         element: <TvShowsDetail />,
       },
-      {
-        path: "/shows-details",
-        element: <TvShowsDetailOld />,
-      },
+      // {
+      //   path: "/shows-details",
+      //   element: <TvShowsDetailOld />,
+      // },
 
-      {
-        path: "/tv-shows",
-        element: <TvShowsList />,
-      },
+      // {
+      //   path: "/tv-shows",
+      //   element: <TvShowsList />,
+      // },
 
       {
         path: "/episodes",

@@ -1,10 +1,10 @@
 import { Fragment, memo } from "react";
 
-import SectionSlider from "../../components/slider/SectionSlider";
-import CardStyle from "../../components/cards/CardStyle";
-import { detailPath } from "../../services";
+import { CardStyle, SectionSlider } from "../../common";
+import { detailPath, tmdbImgPath } from "../../services";
 
 import { useRecommendations } from "../../hooks";
+import { embedGenreNames } from "../../helpers";
 
 const Recommendation = memo(({ id }) => {
   const {
@@ -18,18 +18,21 @@ const Recommendation = memo(({ id }) => {
 
   if (!recommendData || isLoading || error) return null;
 
+  const listData = embedGenreNames("movie", recommendData);
+
   return (
     <Fragment>
       <SectionSlider
         title="Recommendations"
-        list={recommendData}
+        list={listData}
         className="related-movie-block"
         slidesPerView={6}
       >
         {(i) => (
           <CardStyle
-            image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+            image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
+            subtitle={i.genres.join(", ")}
             watchlistLink="/playlist"
             link={detailPath("movie", i.id)}
           />

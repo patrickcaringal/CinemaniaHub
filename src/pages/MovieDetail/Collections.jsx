@@ -1,12 +1,9 @@
 import { Fragment, memo } from "react";
 
-//components
-import SectionSlider from "../../components/slider/SectionSlider";
-import CardStyle from "../../components/cards/CardStyle";
-
-//static data
-
+import { SectionSlider, CardStyle } from "../../common";
 import { useCollection } from "../../hooks";
+import { formatDate } from "../../helpers";
+import { tmdbImgPath } from "../../services";
 
 const MoviesRecommendedForYou = memo(({ data }) => {
   const {
@@ -29,8 +26,9 @@ const MoviesRecommendedForYou = memo(({ data }) => {
       >
         {(i) => (
           <CardStyle
-            image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+            image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
+            subtitle={formatDate(i.release_date)}
             watchlistLink="/playlist"
             link="/movies-detail"
           />

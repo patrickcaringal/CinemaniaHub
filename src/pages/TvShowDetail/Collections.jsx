@@ -1,10 +1,10 @@
 import { Fragment, memo } from "react";
 
-//components
-import SectionSlider from "../../components/slider/SectionSlider";
-import CardStyle from "../../components/cards/CardStyle";
+import { SectionSlider, CardStyle } from "../../common";
+import { tmdbImgPath } from "../../services";
 
 const Collections = memo(({ data }) => {
+  console.log(data);
   return (
     <Fragment>
       <SectionSlider
@@ -15,8 +15,9 @@ const Collections = memo(({ data }) => {
       >
         {(i) => (
           <CardStyle
-            image={`https://image.tmdb.org/t/p/original/${i.poster_path}`}
+            image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
+            subtitle={`${i.episode_count} Episodes`}
             watchlistLink="/playlist"
             link="/movies-detail"
           />

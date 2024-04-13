@@ -1,9 +1,7 @@
 import { Fragment, memo } from "react";
-
-// react-router-dom
 import { Link } from "react-router-dom";
 
-const GenersCard = memo((props) => {
+const GenresCard = memo((props) => {
   return (
     <Fragment>
       <div className="iq-card-geners card-hover-style-two">
@@ -35,5 +33,5 @@ const GenersCard = memo((props) => {
   );
 });
 
-GenersCard.displayName = "GenersCard";
-export default GenersCard;
+GenresCard.displayName = "GenresCard";
+export default GenresCard;

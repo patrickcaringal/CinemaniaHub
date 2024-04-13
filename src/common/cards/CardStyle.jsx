@@ -1,9 +1,7 @@
 import { Fragment, memo } from "react";
-
-//react-router-dom
 import { Link } from "react-router-dom";
 
-const CardStyle = memo(({ title, genres = [], link, image }) => {
+const CardStyle = memo(({ title, subtitle, link, image }) => {
   return (
     <Fragment>
       <div className="iq-card card-hover">
@@ -22,12 +20,12 @@ const CardStyle = memo(({ title, genres = [], link, image }) => {
           <div className="card-description with-transition">
             <div className="cart-content">
               <div className="content-left">
-                <h5 className="iq-title text-capitalize">
+                <h5 className="iq-title text-capitalize line-count-2">
                   <Link to={link}>{title}</Link>
                 </h5>
                 <div className="movie-time d-flex align-items-center mt-2">
                   <span className="movie-time-text font-normal line-count-1">
-                    {genres.join(", ")}
+                    {subtitle}
                   </span>
                 </div>
               </div>

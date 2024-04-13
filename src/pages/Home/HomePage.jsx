@@ -47,17 +47,11 @@ const HomePage = memo(() => {
         isLoading={trendingLoading}
       />
 
-      {/* NOTE: section not needed */}
-      {/* <ContinueWatching /> */}
-
       <TopTenMoviesToWatch
         data={topMovieData.slice(0, 10)}
         error={topMovieError}
         isLoading={topMovieLoading}
       />
-
-      {/* NOTE: section not needed */}
-      {/* <OnlyOnStreamit /> */}
 
       <VerticalSectionSlider
         data={trendingData.slice(11, 20)}
