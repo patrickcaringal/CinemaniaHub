@@ -28,7 +28,8 @@ const GenresPage = lazy(() => import("../views/GenresPage"));
 const TagsPage = lazy(() => import("../views/TagsPage"));
 
 // cast pages
-const CastList = lazy(() => import("../views/Cast/ListPage"));
+const CastList = lazy(() => import("../pages/MovieCredits/ListPage"));
+const CastListOld = lazy(() => import("../views/Cast/ListPage"));
 const DetailPage = lazy(() => import("../views/Cast/DetailPage"));
 const CastViewAll = lazy(() => import("../views/Cast/ViewAll"));
 
@@ -119,6 +120,10 @@ export const LandingpageRouter = [
       //   element: <MovieDetail2 />,
       // },
       {
+        path: "/movie/:id/credits",
+        element: <CastList />,
+      },
+      {
         path: "/tv/:id",
         element: <TvShowsDetail />,
       },
@@ -174,7 +179,7 @@ export const LandingpageRouter = [
       },
       {
         path: "/cast",
-        element: <CastList />,
+        element: <CastListOld />,
       },
       {
         path: "/cast-detail",

@@ -32,10 +32,7 @@ export const ListPage = memo(() => {
           </Row>
           <div className="text-center">
             <div className="iq-button">
-              <Link
-                to="#"
-                className="btn text-uppercase position-relative"
-              >
+              <Link to="#" className="btn text-uppercase position-relative">
                 <span className="button-text">load more</span>{" "}
                 <i className="fa-solid fa-play"></i>
               </Link>
