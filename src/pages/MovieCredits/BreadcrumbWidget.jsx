@@ -1,13 +1,5 @@
 import { Fragment, memo } from "react";
-
-//react bootstrap
-import { Breadcrumb, Container, Row, Col } from "react-bootstrap";
-
-//function
-import { generateImgPath } from "../../StaticData/data";
-
-//img
-const imagePath = generateImgPath("/assets/images/pages/01.webp");
+import { Container, Row, Col } from "react-bootstrap";
 
 const BreadCrumbWidget = memo(({ title, bannerImgUrl }) => {
   return (
@@ -25,14 +17,9 @@ const BreadCrumbWidget = memo(({ title, bannerImgUrl }) => {
             <Col sm="12">
               <nav className="text-center">
                 <h2 className="title text-capitalize">{title}</h2>
-                <Breadcrumb
-                  className="main-bg"
-                  listProps={{
-                    className: "text-center justify-content-center",
-                  }}
-                >
-                  <Breadcrumb.Item> Cast & Crew</Breadcrumb.Item>
-                </Breadcrumb>
+                <p className="text-center display-5">
+                  <strong>Cast & Crew</strong>
+                </p>
               </nav>
             </Col>
           </Row>

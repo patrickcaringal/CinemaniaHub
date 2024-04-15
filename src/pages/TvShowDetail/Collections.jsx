@@ -4,7 +4,6 @@ import { SectionSlider, CardStyle } from "../../common";
 import { tmdbImgPath } from "../../services";
 
 const Collections = memo(({ data }) => {
-  console.log(data);
   return (
     <Fragment>
       <SectionSlider

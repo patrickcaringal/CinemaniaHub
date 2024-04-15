@@ -30,7 +30,10 @@ const TagsPage = lazy(() => import("../views/TagsPage"));
 // cast pages
 const CastList = lazy(() => import("../pages/MovieCredits/ListPage"));
 const CastListOld = lazy(() => import("../views/Cast/ListPage"));
-const DetailPage = lazy(() => import("../views/Cast/DetailPage"));
+const PersonDetailPageOld = lazy(() => import("../views/Cast/DetailPage"));
+const PersonDetailPage = lazy(() =>
+  import("../pages/PersonDetail/PersonDetailPage")
+);
 const CastViewAll = lazy(() => import("../views/Cast/ViewAll"));
 
 // blog pages
@@ -138,6 +141,11 @@ export const LandingpageRouter = [
       // },
 
       {
+        path: "/person/:id",
+        element: <PersonDetailPage />,
+      },
+
+      {
         path: "/episodes",
         element: <LatestEpisodes />,
       },
@@ -183,7 +191,7 @@ export const LandingpageRouter = [
       },
       {
         path: "/cast-detail",
-        element: <DetailPage />,
+        element: <PersonDetailPageOld />,
       },
       {
         path: "/cast-view-all",

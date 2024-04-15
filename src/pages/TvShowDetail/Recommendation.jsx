@@ -16,7 +16,7 @@ const Recommendation = memo(({ id }) => {
     id,
   });
 
-  if (!recommendData || isLoading || error) return null;
+  if (!recommendData?.length || isLoading || error) return null;
 
   const listData = embedGenreNames("tv", recommendData);
 

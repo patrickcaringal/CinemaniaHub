@@ -1,15 +1,12 @@
-import React, { Fragment, memo } from "react";
+import { Fragment, memo } from "react";
 import { useParams } from "react-router-dom";
 
-import { Container, Row, Col, Nav, Tab, Form } from "react-bootstrap";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Nav, Tab } from "react-bootstrap";
 
 import BreadcrumbWidget from "./BreadcrumbWidget";
-import CastCard from "../../components/cards/CastCard";
+import { CastCard } from "../../common";
 import { useMovieDetail } from "../../hooks";
-import { tmdbImgPath } from "../../services";
+import { tmdbImgPath, personDetailPath } from "../../services";
 import { useEnterExit } from "../../utilities/usePage";
 
 export const ListPage = memo(() => {
@@ -82,11 +79,11 @@ export const ListPage = memo(() => {
                 <Row className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6">
                   {cast.map((i, index) => (
                     <Col key={index}>
-                      {/* TODO: common */}
                       <CastCard
                         title={i.name}
                         category={i.character}
                         image={tmdbImgPath("w185", i.profile_path)}
+                        link={personDetailPath(i.id)}
                       />
                     </Col>
                   ))}
@@ -106,6 +103,7 @@ export const ListPage = memo(() => {
                         title={i.name}
                         category={i.department}
                         image={tmdbImgPath("w185", i.profile_path)}
+                        link={personDetailPath(i.id)}
                       />
                     </Col>
                   ))}

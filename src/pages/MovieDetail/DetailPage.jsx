@@ -9,7 +9,7 @@ import Banner from "./Banner";
 import Casts from "./Casts";
 
 import { useEnterExit } from "../../utilities/usePage";
-
+import { creditsPath } from "../../services";
 import { useMovieDetail } from "../../hooks";
 
 const MovieDetail = memo(() => {
@@ -36,7 +36,10 @@ const MovieDetail = memo(() => {
   return (
     <Fragment>
       <Banner data={data} />
-      <Casts data={cast?.slice(0, 10)} />
+      <Casts
+        data={cast?.slice(0, 10)}
+        viewAllLink={creditsPath("movie", params?.id)}
+      />
       {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
       {!!backdrops.length && (
         <ImagesSection
@@ -46,11 +49,6 @@ const MovieDetail = memo(() => {
         />
       )}
       <Recommendation id={params?.id} />
-
-      {/* <MoviesRecommendedForYou />
-      <RelatedMovies />
-      <RelatedVideos />
-      <UpcomingMovies /> */}
     </Fragment>
   );
 });

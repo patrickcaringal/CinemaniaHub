@@ -2,8 +2,8 @@ import { Fragment, memo } from "react";
 
 import { SectionSlider, CardStyle } from "../../common";
 import { useCollection } from "../../hooks";
-import { formatDate } from "../../helpers";
-import { tmdbImgPath } from "../../services";
+import { formatDate, sortByReleaseAsc } from "../../helpers";
+import { detailPath, tmdbImgPath } from "../../services";
 
 const MoviesRecommendedForYou = memo(({ data }) => {
   const {
@@ -20,7 +20,9 @@ const MoviesRecommendedForYou = memo(({ data }) => {
     <Fragment>
       <SectionSlider
         title={collectionData.name}
-        list={collectionData.parts.filter((i) => i.vote_count !== 0)}
+        list={collectionData.parts
+          .filter((i) => i.vote_count !== 0)
+          .sort(sortByReleaseAsc)}
         className="recommended-block"
         slidesPerView={6}
       >
@@ -30,7 +32,7 @@ const MoviesRecommendedForYou = memo(({ data }) => {
             title={i.title || i.name}
             subtitle={formatDate(i.release_date)}
             watchlistLink="/playlist"
-            link="/movies-detail"
+            link={detailPath("movie", i.id)}
           />
         )}
       </SectionSlider>

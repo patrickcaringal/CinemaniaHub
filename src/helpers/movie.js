@@ -10,3 +10,14 @@ export const formatRuntime = (num) => {
 };
 
 export const formatDate = (date) => dayjs(date).format("MMM DD, YYYY");
+
+export const sortByVote = (a, b) => b.vote_count - a.vote_count;
+
+export const sortByReleaseAsc = (a, b) =>
+  new Date(a.release_date) - new Date(b.release_date);
+
+export const sortByReleaseDesc = (a, b) =>
+  new Date(b.release_date) - new Date(a.release_date);
+
+export const sortByFirstAirDateDesc = (a, b) =>
+  new Date(b.first_air_date) - new Date(a.first_air_date);

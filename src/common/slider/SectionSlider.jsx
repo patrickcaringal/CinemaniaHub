@@ -67,12 +67,14 @@ const SectionSlider = memo(
           <div className="overflow-hidden card-style-slider" ref={slider}>
             <div className="d-flex align-items-center justify-content-between px-3 my-4">
               <h5 className="main-title text-capitalize mb-0">{title}</h5>
-              <Link
-                to={link ? link : "/view-all"}
-                className="text-primary iq-view-all text-decoration-none"
-              >
-                View All
-              </Link>
+              {link && (
+                <Link
+                  to={link ? link : "/view-all"}
+                  className="text-primary iq-view-all text-decoration-none"
+                >
+                  View All
+                </Link>
+              )}
             </div>
             <Swiper
               className="position-relative swiper swiper-card"
