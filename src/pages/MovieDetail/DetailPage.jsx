@@ -11,6 +11,7 @@ import Casts from "./Casts";
 import { useEnterExit } from "../../utilities/usePage";
 import { creditsPath } from "../../services";
 import { useMovieDetail } from "../../hooks";
+import { sortByVote } from "../../helpers";
 
 const MovieDetail = memo(() => {
   const params = useParams();
@@ -42,11 +43,7 @@ const MovieDetail = memo(() => {
       />
       {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
       {!!backdrops.length && (
-        <ImagesSection
-          data={backdrops
-            .sort((a, b) => b.vote_count - a.vote_count)
-            .slice(0, 10)}
-        />
+        <ImagesSection data={backdrops.sort(sortByVote).slice(0, 10)} />
       )}
       <Recommendation id={params?.id} />
     </Fragment>

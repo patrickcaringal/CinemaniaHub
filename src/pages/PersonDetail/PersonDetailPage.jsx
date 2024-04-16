@@ -39,7 +39,7 @@ const DetailPage = memo(() => {
     (i) => !isMovie(i.media_type) && !!i.first_air_date && !!i.vote_count
   );
 
-  const knownForCredits = movieCredits.sort(sortByVote).slice(0, 5);
+  const knownForCredits = cast.sort(sortByVote).slice(0, 5);
 
   return (
     <Fragment>

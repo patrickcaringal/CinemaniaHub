@@ -21,3 +21,5 @@ export const sortByReleaseDesc = (a, b) =>
 
 export const sortByFirstAirDateDesc = (a, b) =>
   new Date(b.first_air_date) - new Date(a.first_air_date);
+
+export const sortByOrder = (a, b) => a.order - b.order;

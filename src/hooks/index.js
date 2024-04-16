@@ -6,4 +6,5 @@ export { default as useTvShowDetail } from "./useTvShowDetail";
 export { default as useCollection } from "./useCollection";
 export { default as useRecommendations } from "./useRecommendations";
 export { default as useCredits } from "./useCredits";
+export { default as useTvShowCredits } from "./useTvShowCredits";
 export { default as usePersonDetail } from "./usePersonDetail";

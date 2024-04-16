@@ -29,6 +29,7 @@ const TagsPage = lazy(() => import("../views/TagsPage"));
 
 // cast pages
 const CastList = lazy(() => import("../pages/MovieCredits/ListPage"));
+const TvShowCastList = lazy(() => import("../pages/TvShowCredits/ListPage"));
 const CastListOld = lazy(() => import("../views/Cast/ListPage"));
 const PersonDetailPageOld = lazy(() => import("../views/Cast/DetailPage"));
 const PersonDetailPage = lazy(() =>
@@ -76,6 +77,7 @@ const MyAccount = lazy(() => import("../views/MerchandisePages/my-account"));
 
 // view all page
 const ViewAll = lazy(() => import("../views/ViewAll"));
+const MovieDiscover = lazy(() => import("../pages/MovieDiscover/ViewAll"));
 const CommingSoonPage = lazy(() =>
   import("../views/ExtraPages/CommingSoonPage")
 );
@@ -115,6 +117,10 @@ export const LandingpageRouter = [
       //   element: <MoviePage />,
       // },
       {
+        path: "/movie/discover",
+        element: <MovieDiscover />,
+      },
+      {
         path: "/movie/:id",
         element: <MovieDetail />,
       },
@@ -126,10 +132,16 @@ export const LandingpageRouter = [
         path: "/movie/:id/credits",
         element: <CastList />,
       },
+
       {
         path: "/tv/:id",
         element: <TvShowsDetail />,
       },
+      {
+        path: "/tv/:id/credits",
+        element: <TvShowCastList />,
+      },
+
       // {
       //   path: "/shows-details",
       //   element: <TvShowsDetailOld />,

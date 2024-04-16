@@ -18,7 +18,7 @@ const PopularShows = memo(({ data }) => {
                   image={tmdbImgPath("w342", i.poster_path)}
                   title={i.title || i.name}
                   subtitle={formatDate(i.release_date)}
-                  link={detailPath("movie", i.id)}
+                  link={detailPath(i.media_type, i.id)}
                 />
               </Col>
             );

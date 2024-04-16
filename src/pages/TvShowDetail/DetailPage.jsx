@@ -7,10 +7,11 @@ import Recommendation from "./Recommendation";
 import ImagesSection from "./GenreSlider";
 import Casts from "./Casts";
 
+import { creditsPath } from "../../services";
 import { useEnterExit } from "../../utilities/usePage";
 
-//swiper
 import { useTvShowDetail } from "../../hooks";
+import { sortByOrder, sortByVote } from "../../helpers";
 
 const TvShowsDetail = memo(() => {
   const params = useParams();
@@ -36,18 +37,15 @@ const TvShowsDetail = memo(() => {
   return (
     <Fragment>
       <Banner data={data} />
-      <Casts data={cast?.slice(0, 10)} />
+      <Casts
+        data={cast?.slice(0, 10).sort(sortByOrder)}
+        viewAllLink={creditsPath("tv", params?.id)}
+      />
       {!!seasons.length && (
         <Collections data={seasons.filter((i) => !!i.season_number)} />
       )}
       {!!backdrops.length && (
-        <ImagesSection
-          data={backdrops
-            .sort((a, b) => {
-              return b.vote_count - a.vote_count;
-            })
-            .slice(0, 10)}
-        />
+        <ImagesSection data={backdrops.sort(sortByVote).slice(0, 10)} />
       )}
       <Recommendation id={params?.id} />
     </Fragment>

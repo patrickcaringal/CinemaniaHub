@@ -31,7 +31,7 @@ const MoviesRecommendedForYou = memo(({ data }) => {
             image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
             subtitle={formatDate(i.release_date)}
-            watchlistLink="/playlist"
+            // watchlistLink="/playlist"
             link={detailPath("movie", i.id)}
           />
         )}

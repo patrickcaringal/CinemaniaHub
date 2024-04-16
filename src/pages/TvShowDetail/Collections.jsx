@@ -17,8 +17,8 @@ const Collections = memo(({ data }) => {
             image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
             subtitle={`${i.episode_count} Episodes`}
-            watchlistLink="/playlist"
-            link="/movies-detail"
+            // watchlistLink="/playlist"
+            link="/movies-detail" // season page
           />
         )}
       </SectionSlider>

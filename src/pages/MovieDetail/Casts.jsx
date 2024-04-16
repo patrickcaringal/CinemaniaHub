@@ -18,7 +18,6 @@ const Casts = memo(({ data, viewAllLink = "" }) => {
           link={viewAllLink}
         >
           {(item) => (
-            // Cast Card component
             <SwiperSlide key={item.id} as="li">
               <Link to={personDetailPath(item.id)}>
                 <Row className="cast-images m-0 align-items-center position-relative">
