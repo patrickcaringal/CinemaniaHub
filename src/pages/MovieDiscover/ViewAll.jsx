@@ -1,110 +1,78 @@
-import { Fragment, memo } from "react";
+import { Fragment, memo, useState } from "react";
 
-//react-bootstrap
 import { Container, Row, Col } from "react-bootstrap";
+import { useFormik } from "formik";
 
-//components
-import CardStyle from "../../components/cards/CardStyle";
+import { CardStyle } from "../../common";
 import BreadCrumbWidget from "../../components/BreadcrumbWidget";
 
-//function
-import { generateImgPath } from "../../StaticData/data";
+import { useDiscover } from "../../hooks";
 import { useEnterExit } from "../../utilities/usePage";
+import { detailPath } from "../../services";
+
 import Toolbar from "./Toolbar";
 
+const initialValues = {
+  sort_by: "popularity.desc",
+  "release_date.gte": undefined,
+  "release_date.lte": undefined,
+  with_genres: [],
+};
+
 const ViewAll = memo(() => {
+  const [searchQuery, setSearchQuery] = useState(
+    `sort_by=${initialValues.sort_by}`
+  );
   useEnterExit();
 
-  const viewAll = [
+  const formik = useFormik({
+    initialValues,
+    onSubmit: () => {},
+  });
+
+  const handleSubmit = () => {
+    const { sort_by, with_genres } = formik.values;
+    const searchParams = new URLSearchParams();
+    searchParams.append("sort_by", sort_by);
+    if (with_genres.length > 0)
+      searchParams.append("with_genres", with_genres.join("|"));
+
+    setSearchQuery(searchParams.toString());
+  };
+
+  const { data, error, isLoading } = useDiscover(
     {
-      image: generateImgPath("/assets/images/movies/related/01.webp"),
-      title: "Giikre",
-      movieTime: "2hr: 12mins",
+      entity: "movie",
+      queryParams: {
+        sort_by: formik.values.sort_by,
+        with_genres:
+          formik.values.with_genres.length > 0
+            ? formik.values.with_genres.join("|")
+            : undefined,
+      },
     },
-    {
-      image: generateImgPath("/assets/images/movies/related/02.webp"),
-      title: "YoShi",
-      movieTime: "1hr: 22mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/related/03.webp"),
-      title: "We Gare",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/related/04.webp"),
-      title: "Avengers",
-      movieTime: "1hr: 45mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/related/05.webp"),
-      title: "Chosfies",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/related/06.webp"),
-      title: "Tf Oaler",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/related/07.webp"),
-      title: "Another Danger",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/01.webp"),
-      title: "CRW",
-      movieTime: "2hr: 12mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/02.webp"),
-      title: "Batte Wiire",
-      movieTime: "1hr: 22mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/03.webp"),
-      title: "Goal",
-      movieTime: "2hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/04.webp"),
-      title: "Dandacg",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/05.webp"),
-      title: "Mexcan",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/06.webp"),
-      title: "Oit moleld",
-      movieTime: "1hr: 30mins",
-    },
-    {
-      image: generateImgPath("/assets/images/movies/popular/07.webp"),
-      title: "Another Danger",
-      movieTime: "1hr: 30mins",
-    },
-  ];
+    [searchQuery]
+  );
+
+  if (isLoading || error) return null;
+
   return (
     <Fragment>
-      {/* <BreadCrumbWidget title="View All" /> */}
+      <BreadCrumbWidget title="Discover Movies" />
       <Container fluid className="mt-5">
-        <Toolbar />
+        <Toolbar formik={formik} onSubmit={handleSubmit} />
       </Container>
-      <div className="section-padding">
+      <div className="mt-5">
         <Container fluid>
           <div className="card-style-grid">
-            <Row className="row row-cols-xl-4 row-cols-md-2 row-cols-1">
-              {viewAll.map((item, index) => (
-                <Col key={index} className="mb-4">
+            <Row className="row row-cols-xl-5 row-cols-md-2 row-cols-1">
+              {data.map((i, index) => (
+                <Col key={index} className="mb-5">
                   <CardStyle
-                    image={item.image}
-                    title={item.title}
-                    movieTime={item.movieTime}
-                    watchlistLink="/playlist"
-                    link="/movies-detail"
+                    image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+                    title={i.title || i.name}
+                    subtitle={i?.genres?.join(", ")}
+                    link={detailPath("movie", i.id)}
                   />
                 </Col>
               ))}

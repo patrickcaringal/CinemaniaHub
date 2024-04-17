@@ -117,7 +117,7 @@ export const LandingpageRouter = [
       //   element: <MoviePage />,
       // },
       {
-        path: "/movie/discover",
+        path: "/movie-discover",
         element: <MovieDiscover />,
       },
       {

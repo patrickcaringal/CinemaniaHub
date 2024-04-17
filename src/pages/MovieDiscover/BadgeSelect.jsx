@@ -1,21 +1,12 @@
-import { useState, memo } from "react";
+import { memo } from "react";
 import { Badge } from "react-bootstrap";
 import { movieGenre, tvGenre } from "../../services/data/genres";
 
-const BadgeSelect = memo(() => {
-  const data = tvGenre;
-
-  const [selected, setSelected] = useState([]);
-
-  const onSelect = (id) => {
-    setSelected((prev) => {
-      if (prev.includes(id)) return prev.filter((i) => i !== id);
-      return [...prev, id];
-    });
-  };
+const BadgeSelect = memo(({ selected = [], onSelect }) => {
+  const data = movieGenre;
 
   return (
-    <div style={{ maxWidth: 500 }}>
+    <div>
       <div className="d-inline-flex gap-2 flex-wrap">
         {data.map((i) => {
           return (

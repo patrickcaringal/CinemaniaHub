@@ -121,14 +121,18 @@ const HeaderDefault = memo(() => {
                         aria-expanded={open}
                         onClick={() => setOpen(!open)}
                         className={`${
-                          location.pathname === "/movies" ? "active" : ""
+                          location.pathname === "/movie-discover"
+                            ? "active"
+                            : ""
                         }`}
                       >
                         <Link
                           className={`${
-                            location.pathname === "/movies" ? "active" : ""
+                            location.pathname === "/movie-discover"
+                              ? "active"
+                              : ""
                           } nav-link`}
-                          to="/movies"
+                          to="/movie-discover"
                         >
                           <span className="d-inline-block">Movie</span>
                         </Link>
@@ -251,7 +255,7 @@ const HeaderDefault = memo(() => {
                           </Nav.Item>
                           <Nav.Item as="li">
                             <Link
-                              className={`${
+                              className={`${/movies
                                 location.pathname === "/movies" ? "active" : ""
                               } nav-link ${isMega ? "p-0" : ""}`}
                               to="/movies"
