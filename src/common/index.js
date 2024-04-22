@@ -2,4 +2,5 @@
 
 export * from "./cards";
 export * from "./slider";
+export * from "./others";
 // export { SectionSlider, x };

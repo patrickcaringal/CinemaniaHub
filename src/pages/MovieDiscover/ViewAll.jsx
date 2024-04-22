@@ -1,21 +1,19 @@
 import { Fragment, memo, useState } from "react";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useFormik } from "formik";
 
-import { CardStyle } from "../../common";
-import BreadCrumbWidget from "../../components/BreadcrumbWidget";
-
+import { BreadcrumbWidget } from "../../common";
 import { useDiscover } from "../../hooks";
 import { useEnterExit } from "../../utilities/usePage";
-import { detailPath } from "../../services";
 
 import Toolbar from "./Toolbar";
+import CardList from "./CardList";
 
 const initialValues = {
   sort_by: "popularity.desc",
-  "release_date.gte": undefined,
-  "release_date.lte": undefined,
+  release_date_gte: undefined,
+  release_date_lte: undefined,
   with_genres: [],
 };
 
@@ -32,10 +30,18 @@ const ViewAll = memo(() => {
 
   const handleSubmit = () => {
     const { sort_by, with_genres } = formik.values;
+
+    console.log(formik.values);
     const searchParams = new URLSearchParams();
     searchParams.append("sort_by", sort_by);
     if (with_genres.length > 0)
       searchParams.append("with_genres", with_genres.join("|"));
+
+    if (formik.values.release_date_gte)
+      searchParams.append("release_date.gte", formik.values.release_date_gte);
+
+    if (formik.values.release_date_lte)
+      searchParams.append("release_date.lte", formik.values.release_date_lte);
 
     setSearchQuery(searchParams.toString());
   };
@@ -49,6 +55,12 @@ const ViewAll = memo(() => {
           formik.values.with_genres.length > 0
             ? formik.values.with_genres.join("|")
             : undefined,
+        "release_date.gte": formik.values.release_date_gte
+          ? formik.values.release_date_gte
+          : undefined,
+        "release_date.lte": formik.values.release_date_lte
+          ? formik.values.release_date_lte
+          : undefined,
       },
     },
     [searchQuery]
@@ -58,27 +70,12 @@ const ViewAll = memo(() => {
 
   return (
     <Fragment>
-      <BreadCrumbWidget title="Discover Movies" />
+      <BreadcrumbWidget title="Discover Movies" />
       <Container fluid className="mt-5">
         <Toolbar formik={formik} onSubmit={handleSubmit} />
       </Container>
       <div className="mt-5">
-        <Container fluid>
-          <div className="card-style-grid">
-            <Row className="row row-cols-xl-5 row-cols-md-2 row-cols-1">
-              {data.map((i, index) => (
-                <Col key={index} className="mb-5">
-                  <CardStyle
-                    image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
-                    title={i.title || i.name}
-                    subtitle={i?.genres?.join(", ")}
-                    link={detailPath("movie", i.id)}
-                  />
-                </Col>
-              ))}
-            </Row>
-          </div>
-        </Container>
+        <CardList data={data} />
       </div>
     </Fragment>
   );

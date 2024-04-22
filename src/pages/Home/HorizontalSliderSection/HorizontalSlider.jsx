@@ -1,15 +1,10 @@
 import { memo, Fragment, useState } from "react";
-
-// react-router-dom
 import { Link } from "react-router-dom";
-
-// components
-import CustomButton from "./CustomButton";
-import { detailPath } from "../../../services";
-
-// swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
+
+import CustomButton from "./CustomButton";
+import { tmdbImgPath, detailPath } from "../../../services";
 
 const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -62,7 +57,7 @@ const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
                         <div className="block-images position-relative">
                           <div className="img-box">
                             <img
-                              src={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+                              src={tmdbImgPath("w342", i.poster_path)}
                               className="img-fluid"
                               alt=""
                               loading="lazy"
@@ -104,7 +99,7 @@ const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
                   <SwiperSlide key={i.title || i.name} className="p-0">
                     <div className="slider--image block-images">
                       <img
-                        src={`https://image.tmdb.org/t/p/original/${i.backdrop_path}`}
+                        src={tmdbImgPath("original", i.backdrop_path)}
                         loading="lazy"
                         alt="banner"
                       />

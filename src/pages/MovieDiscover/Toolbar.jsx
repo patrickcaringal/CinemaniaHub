@@ -1,5 +1,4 @@
 import { Fragment, memo } from "react";
-
 import { Form } from "react-bootstrap";
 
 import BadgeSelect from "./BadgeSelect";
@@ -53,9 +52,9 @@ const Toolbar = memo(({ formik, onSubmit }) => {
               size="sm"
               type="date"
               id="exampleInputdate"
-              // defaultValue="2019-12-18"
+              value={values.release_date_gte}
               onChange={(e) => {
-                setFieldValue("release_date.gte", e.target.value);
+                setFieldValue("release_date_gte", e.target.value);
               }}
             />
             <div className="invalid-feedback">Please choose a username.</div>
@@ -66,13 +65,12 @@ const Toolbar = memo(({ formik, onSubmit }) => {
           <Form.Label className="mt-2">To</Form.Label>
           <div>
             <Form.Control
-              // className="is-invalid"
               size="sm"
               type="date"
               id="exampleInputdate"
-              // defaultValue="2019-12-18"
+              value={values.release_date_lte}
               onChange={(e) => {
-                setFieldValue("release_date.lte", e.target.value);
+                setFieldValue("release_date_lte", e.target.value);
               }}
             />
             <div className="invalid-feedback">Please choose a username.</div>

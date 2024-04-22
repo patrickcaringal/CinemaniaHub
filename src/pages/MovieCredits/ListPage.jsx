@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { Container, Row, Col, Nav, Tab } from "react-bootstrap";
 
-import BreadcrumbWidget from "./BreadcrumbWidget";
+import { BreadcrumbWidget } from "../../common";
 import { CastCard } from "../../common";
 import { useMovieDetail } from "../../hooks";
 import { tmdbImgPath, personDetailPath } from "../../services";
@@ -31,6 +31,7 @@ export const ListPage = memo(() => {
     <Fragment>
       <BreadcrumbWidget
         title={`${data.title}`}
+        subtitle="Cast & Crew"
         bannerImgUrl={tmdbImgPath("original", data.backdrop_path)}
       />
       <Container className="mt-5">

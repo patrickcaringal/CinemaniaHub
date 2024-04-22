@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
-import { detailPath } from "../../services";
+import { tmdbImgPath, detailPath } from "../../services";
 
 const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -58,7 +58,7 @@ const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
                         <div className="block-images position-relative">
                           <div className="img-box slider--image">
                             <img
-                              src={`https://image.tmdb.org/t/p/original/${i.backdrop_path}`}
+                              src={tmdbImgPath("original", i.backdrop_path)}
                               className="img-fluid"
                               alt=""
                               loading="lazy"
@@ -112,7 +112,7 @@ const VerticalSliderSection = memo(({ data = [], error, isLoading }) => {
                   >
                     <div className="slider--image block-images">
                       <img
-                        src={`https://image.tmdb.org/t/p/original/${i.backdrop_path}`}
+                        src={tmdbImgPath("original", i.backdrop_path)}
                         loading="lazy"
                         alt=""
                       />

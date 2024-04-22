@@ -1,8 +1,7 @@
 import { Fragment, memo } from "react";
 
-//componets
 import { SectionSlider, CardStyle } from "../../../common";
-import { detailPath } from "../../../services";
+import { tmdbImgPath, detailPath } from "../../../services";
 
 const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
   if (isLoading || error) return null;
@@ -17,7 +16,7 @@ const PopularTvSeries = memo(({ data = [], error, isLoading }) => {
       >
         {(i) => (
           <CardStyle
-            image={`https://image.tmdb.org/t/p/w342/${i.poster_path}`}
+            image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
             subtitle={i.genres.join(", ")}
             link={detailPath("tv", i.id)}

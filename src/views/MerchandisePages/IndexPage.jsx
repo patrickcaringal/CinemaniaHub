@@ -141,8 +141,7 @@ const IndexPage = memo(() => {
                 <div
                   className="card-img-overlay product-card-img-overlay"
                   style={{
-                    backgroundImage:
-                      "url(https://image.tmdb.org/t/p/w342/8ohejkcQkNgkJgLn71Ws6Kd35g0.jpg)",
+                    backgroundImage: "url(assets/images/shop/card/01.webp)",
                   }}
                 ></div>
                 <div className="card-body w-100">
