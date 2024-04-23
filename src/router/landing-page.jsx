@@ -77,7 +77,10 @@ const MyAccount = lazy(() => import("../views/MerchandisePages/my-account"));
 
 // view all page
 const ViewAll = lazy(() => import("../views/ViewAll"));
-const MovieDiscover = lazy(() => import("../pages/MovieDiscover/ViewAll"));
+const MovieDiscover = lazy(() => import("../pages/MovieDiscover/DiscoverPage"));
+const TvShowDiscover = lazy(() =>
+  import("../pages/TvShowDiscover/DiscoverPage")
+);
 const CommingSoonPage = lazy(() =>
   import("../views/ExtraPages/CommingSoonPage")
 );
@@ -119,6 +122,10 @@ export const LandingpageRouter = [
       {
         path: "/movie-discover",
         element: <MovieDiscover />,
+      },
+      {
+        path: "/tv-discover",
+        element: <TvShowDiscover />,
       },
       {
         path: "/movie/:id",

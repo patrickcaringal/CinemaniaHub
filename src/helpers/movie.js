@@ -9,7 +9,8 @@ export const formatRuntime = (num) => {
   return `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`;
 };
 
-export const formatDate = (date) => dayjs(date).format("MMM DD, YYYY");
+export const formatDate = (date, format = "MMM DD, YYYY") =>
+  dayjs(date).format(format);
 
 export const sortByVote = (a, b) => b.vote_count - a.vote_count;
 

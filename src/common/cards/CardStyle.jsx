@@ -25,7 +25,7 @@ const CardStyle = memo(({ title, subtitle, link, image }) => {
                 </h5>
                 <div className="movie-time d-flex align-items-center mt-2">
                   <span className="movie-time-text font-normal line-count-1">
-                    {subtitle}
+                    {subtitle || "-"}
                   </span>
                 </div>
               </div>
