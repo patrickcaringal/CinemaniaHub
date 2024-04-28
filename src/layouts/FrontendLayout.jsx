@@ -1,18 +1,11 @@
 import { memo, Fragment, Suspense, useState, useEffect } from "react";
 
-// reacr-router
 import { Outlet, Link } from "react-router-dom";
 
-// header
-import HeaderDefault from "../components/partials/HeaderDefault";
-import HeaderMerchandise from "../components/merchandise/partials/HeaderDefault";
+import HeaderDefault from "../common/partials/HeaderDefault";
 
-// footer
-import FooterDefault from "../components/partials/FooterDefault";
-import MerchandiseFooter from "../components/merchandise/partials/FooterDefault";
-import Loader from "../components/Loader";
-//seetingoffCanvas
-import SettingOffCanvas from "../components/setting/SettingOffCanvas";
+import FooterDefault from "../common/partials/FooterDefault";
+import Loader from "../common/Loader";
 import { useAuthContext } from "../hooks";
 
 const FrontendLayout = memo((props) => {
@@ -40,25 +33,16 @@ const FrontendLayout = memo((props) => {
     };
   }, []);
 
-  console.log(authIsReady);
   if (!authIsReady) return <Suspense fallback={<Loader></Loader>} />;
   return (
     <Fragment>
       {/* <Loader></Loader> */}
       <main className="main-content">
         {props.HeaderMega === "true" && <HeaderDefault></HeaderDefault>}
-        {/* {props.HeaderMerchandise === "true" && (
-          <HeaderMerchandise></HeaderMerchandise>
-        )} */}
         <Suspense fallback={<Loader></Loader>}>
           <Outlet></Outlet>
         </Suspense>
       </main>
-      {/* {props.FooterMerchandise === "true" ? (
-        <MerchandiseFooter />
-      ) : (
-        <FooterDefault />
-      )} */}
       <FooterDefault />
       <div
         id="back-to-top"
@@ -74,7 +58,6 @@ const FrontendLayout = memo((props) => {
           <i className="fa-solid fa-chevron-up"></i>
         </Link>
       </div>
-      {/* <SettingOffCanvas /> */}
     </Fragment>
   );
 });

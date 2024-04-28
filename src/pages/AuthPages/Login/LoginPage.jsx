@@ -126,7 +126,7 @@ const LoginPage = memo(() => {
                     </div>
                   </Form>
                   <p className="my-4 text-center fw-500 text-white">
-                    New to Streamit?{" "}
+                    New to CinemaniaHub?{" "}
                     <Link to="/register" className="text-primary ms-1">
                       Register
                     </Link>

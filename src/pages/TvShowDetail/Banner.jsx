@@ -2,7 +2,7 @@ import { memo } from "react";
 import { Row, Col, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import RatingStar from "../../components/rating-star";
+import RatingStar from "../../common/rating-star";
 
 import { tmdbImgPath } from "../../services";
 

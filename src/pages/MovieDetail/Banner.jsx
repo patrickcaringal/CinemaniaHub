@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { formatRuntime, formatDate } from "../../helpers";
 import { tmdbImgPath } from "../../services";
-import RatingStar from "../../components/rating-star";
+import RatingStar from "../../common/rating-star";
 
 const Banner = memo(({ data }) => {
   const bannerImgUrl = tmdbImgPath("original", data.backdrop_path);
