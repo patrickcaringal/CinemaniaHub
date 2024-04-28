@@ -56,8 +56,10 @@ const ErrorPage1 = lazy(() => import("../views/ExtraPages/ErrorPage1"));
 const ErrorPage2 = lazy(() => import("../views/ExtraPages/ErrorPage2"));
 
 //login pages
-const LoginPage = lazy(() => import("../views/AuthPages/LoginPage"));
-const SignUpPage = lazy(() => import("../views/AuthPages/SignUpPage"));
+// const LoginPage = lazy(() => import("../views/AuthPages/LoginPage"));
+const LoginPage = lazy(() => import("../pages/AuthPages/Login/LoginPage"));
+// const SignUpPage = lazy(() => import("../views/AuthPages/SignUpPage"));
+const SignUpPage = lazy(() => import("../pages/AuthPages/SignUp/SignUpPage"));
 const LostPassword = lazy(() => import("../views/AuthPages/LostPassword"));
 
 // merchandise pages
@@ -106,6 +108,14 @@ export const LandingpageRouter = [
       {
         path: "",
         element: <OTTPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <SignUpPage />,
       },
       // {
       //   path: "/home",
@@ -299,6 +309,14 @@ export const LandingpageRouter = [
     ],
   },
   // {
+  //   path: "/login",
+  //   element: <LoginPage />,
+  // },
+  // {
+  //   path: "/register",
+  //   element: <SignUpPage />,
+  // },
+  // {
   //   path: "/",
   //   element: (
   //     <FrontendLayout HeaderMerchandise="true" FooterMerchandise="true" />
@@ -350,10 +368,7 @@ export const LandingpageRouter = [
   //   path: "/login",
   //   element: <LoginPage />,
   // },
-  // {
-  //   path: "/register",
-  //   element: <SignUpPage />,
-  // },
+
   // {
   //   path: "/lost-password",
   //   element: <LostPassword />,

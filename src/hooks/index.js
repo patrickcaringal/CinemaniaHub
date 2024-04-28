@@ -8,3 +8,9 @@ export { default as useRecommendations } from "./useRecommendations";
 export { default as useCredits } from "./useCredits";
 export { default as useTvShowCredits } from "./useTvShowCredits";
 export { default as usePersonDetail } from "./usePersonDetail";
+
+// auth
+export { useAuthContext } from "./auth/useAuthContext";
+export { useLogin } from "./auth/useLogin";
+export { useSignUp } from "./auth/useSignUp";
+export { useLogout } from "./auth/useLogout";

@@ -13,7 +13,11 @@ import MerchandiseFooter from "../components/merchandise/partials/FooterDefault"
 import Loader from "../components/Loader";
 //seetingoffCanvas
 import SettingOffCanvas from "../components/setting/SettingOffCanvas";
+import { useAuthContext } from "../hooks";
+
 const FrontendLayout = memo((props) => {
+  const { authIsReady } = useAuthContext();
+
   const [animationClass, setAnimationClass] = useState("animate__fadeIn");
 
   const scrollToTop = () => {
@@ -36,6 +40,8 @@ const FrontendLayout = memo((props) => {
     };
   }, []);
 
+  console.log(authIsReady);
+  if (!authIsReady) return <Suspense fallback={<Loader></Loader>} />;
   return (
     <Fragment>
       {/* <Loader></Loader> */}
