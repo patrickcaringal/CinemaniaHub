@@ -15,6 +15,7 @@ import "choices.js/public/assets/styles/choices.min.css";
 
 //router
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./contexts/AuthCtx";
 
 // store
 import { store } from "./store/index";
@@ -29,9 +30,11 @@ const router = createBrowserRouter([...IndexRouters], {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App>
-        <RouterProvider router={router}></RouterProvider>
-      </App>
+      <AuthContextProvider>
+        <App>
+          <RouterProvider router={router}></RouterProvider>
+        </App>
+      </AuthContextProvider>
     </Provider>
   </React.StrictMode>
 );
