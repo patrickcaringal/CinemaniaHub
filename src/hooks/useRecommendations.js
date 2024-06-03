@@ -1,6 +1,6 @@
 import useData from "./useData";
 
-const useRecommendations = ({ entity = "movie", id }) => {
+const useRecommendations = ({ entity = "movie", id }, deps = []) => {
   const params = {
     params: {
       language: "en-US",
@@ -10,7 +10,7 @@ const useRecommendations = ({ entity = "movie", id }) => {
   const { data = [], ...rest } = useData(
     `/${entity}/${id}/recommendations`,
     params,
-    []
+    deps
   );
 
   return { data: data.results, ...rest };

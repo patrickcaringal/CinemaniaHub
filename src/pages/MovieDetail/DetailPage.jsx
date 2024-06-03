@@ -28,7 +28,7 @@ const MovieDetail = memo(() => {
 
   useEnterExit();
 
-  if (!data || isLoading || error) return null;
+  if (!data || error) return null;
 
   const { credits, belongs_to_collection, images } = data;
   const { cast } = credits;
@@ -36,14 +36,18 @@ const MovieDetail = memo(() => {
 
   return (
     <Fragment>
-      <Banner data={data} />
+      <Banner data={data} isLoading={isLoading} />
       <Casts
+        isLoading={isLoading}
         data={cast?.slice(0, 10)}
         viewAllLink={creditsPath("movie", params?.id)}
       />
       {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
       {!!backdrops.length && (
-        <ImagesSection data={backdrops.sort(sortByVote).slice(0, 10)} />
+        <ImagesSection
+          isLoading={isLoading}
+          data={backdrops.sort(sortByVote).slice(0, 10)}
+        />
       )}
       <Recommendation id={params?.id} />
     </Fragment>

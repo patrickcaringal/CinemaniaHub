@@ -64,7 +64,7 @@ const SectionSlider = memo(
               <h5 className="main-title text-capitalize mb-0">
                 {isLoading ? <Skeleton width={111} /> : title}
               </h5>
-              {link && (
+              {!isLoading && link && (
                 <Link
                   to={link ? link : "/view-all"}
                   className="text-primary iq-view-all text-decoration-none"

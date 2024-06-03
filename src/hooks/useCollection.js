@@ -1,13 +1,13 @@
 import useData from "./useData";
 
-const useCollection = ({ id = "" }) => {
+const useCollection = ({ id = "" }, deps = []) => {
   const params = {
     params: {
       language: "en-US",
     },
   };
 
-  const res = useData(`/collection/${id}`, params, []);
+  const res = useData(`/collection/${id}`, params, deps);
 
   return res;
 };

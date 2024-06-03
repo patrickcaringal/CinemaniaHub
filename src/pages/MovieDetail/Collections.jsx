@@ -10,9 +10,7 @@ const MoviesRecommendedForYou = memo(({ data }) => {
     data: collectionData,
     error,
     isLoading,
-  } = useCollection({
-    id: data?.id,
-  });
+  } = useCollection({ id: data?.id }, [data?.id]);
 
   if (!collectionData || isLoading || error) return null;
 
