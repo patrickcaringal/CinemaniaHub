@@ -19,7 +19,11 @@ A website for browsing movies, TV series, actors, and more. It offers details su
 
 ## Screenshots
 
+#### Home page
+
 ![alt text](<localhost_3000_tv_60574 (1).png>)
+
+#### Movie / TV show detail
 
 ![alt text](localhost_3000_tv_60574.png)
 

@@ -10,6 +10,7 @@ import "./assets/scss/streamit.scss";
 import "./assets/scss/custom.scss";
 import "./assets/scss/rtl.scss";
 import "animate.css/animate.css";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import "choices.js/public/assets/styles/choices.min.css";
 
@@ -24,6 +25,8 @@ import { Provider } from "react-redux";
 // index router
 import { IndexRouters } from "./router/index";
 
+import { SkeletonTheme } from "react-loading-skeleton";
+
 const router = createBrowserRouter([...IndexRouters], {
   basename: import.meta.env.VITE_URL,
 });
@@ -31,9 +34,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <AuthContextProvider>
-        <App>
-          <RouterProvider router={router}></RouterProvider>
-        </App>
+        <SkeletonTheme baseColor="#202020" highlightColor="#444">
+          <App>
+            <RouterProvider router={router}></RouterProvider>
+          </App>
+        </SkeletonTheme>
       </AuthContextProvider>
     </Provider>
   </React.StrictMode>

@@ -15,7 +15,9 @@ const useData = (endpoint, requestConfig = {}, deps = []) => {
       .get(endpoint, { signal: controller.signal, ...requestConfig })
       .then((res) => {
         setData(res.data);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;

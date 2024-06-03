@@ -5,22 +5,16 @@ import { Container } from "react-bootstrap";
 
 // react-router-dom
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
+import { v4 as uuidv4 } from "uuid";
 
 // Redux Selector / Action
 
 const modules = [Autoplay, Navigation];
-
-function generateUUID() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
 
 const SectionSlider = memo(
   ({
@@ -32,6 +26,7 @@ const SectionSlider = memo(
     spaceBetween = 0,
     className = "",
     link,
+    isLoading = false,
   }) => {
     const slider = useRef(null);
 
@@ -66,7 +61,9 @@ const SectionSlider = memo(
         <Container fluid>
           <div className="overflow-hidden card-style-slider" ref={slider}>
             <div className="d-flex align-items-center justify-content-between px-3 my-4">
-              <h5 className="main-title text-capitalize mb-0">{title}</h5>
+              <h5 className="main-title text-capitalize mb-0">
+                {isLoading ? <Skeleton width={111} /> : title}
+              </h5>
               {link && (
                 <Link
                   to={link ? link : "/view-all"}
@@ -113,7 +110,7 @@ const SectionSlider = memo(
               modules={modules}
             >
               {list.map((data, index) => (
-                <SwiperSlide tag="li" key={index + generateUUID() + "slider"}>
+                <SwiperSlide tag="li" key={index + uuidv4() + "slider"}>
                   {children({ ...data, count: index + 1 })}
                 </SwiperSlide>
               ))}

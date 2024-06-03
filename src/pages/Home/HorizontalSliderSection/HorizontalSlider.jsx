@@ -2,6 +2,7 @@ import { memo, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper";
+import Skeleton from "react-loading-skeleton";
 
 import CustomButton from "./CustomButton";
 import { tmdbImgPath, detailPath } from "../../../services";
@@ -9,7 +10,8 @@ import { tmdbImgPath, detailPath } from "../../../services";
 const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  if (isLoading || error) return null;
+  if (error) return null;
+  if (isLoading) return <LoadingState />;
 
   return (
     <Fragment>
@@ -199,6 +201,114 @@ const HorizontalSlider = memo(({ data = [], error, isLoading }) => {
     </Fragment>
   );
 });
+
+const LoadingState = () => (
+  <Fragment>
+    <div className="iq-banner-thumb-slider mt-5">
+      <div className="slider">
+        <div className="position-relative slider-bg d-flex justify-content-end">
+          <div className="position-relative my-auto">
+            <div
+              className="horizontal_thumb_slider"
+              data-swiper="slider-thumbs-ott"
+            >
+              <div className="banner-thumb-slider-nav">
+                <Swiper
+                  tag="ul"
+                  direction="horizontal"
+                  navigation={{
+                    prevEl: ".slider-prev",
+                    nextEl: ".slider-next",
+                  }}
+                  spaceBetween={24}
+                  loop={true}
+                  slidesPerView={2}
+                  breakpoints={{
+                    0: {
+                      direction: "horizontal",
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      direction: "horizontal",
+                      slidesPerView: 2,
+                    },
+                  }}
+                  watchSlidesProgress={true}
+                  className="swiper-horizontal swiper-container mb-0"
+                >
+                  <SwiperSlide className="swiper-bg">
+                    <div className="block-images position-relative">
+                      <div className="img-box">
+                        <img
+                          src="/assets/images/transparent-bg.png"
+                          className="img-fluid"
+                          alt=""
+                          loading="lazy"
+                        />
+                        <div className="block-description ps-3">
+                          <Skeleton width={120} />
+                          <Skeleton width={80} />
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+                <div className="slider-prev swiper-button">
+                  <i className="iconly-Arrow-Left-2 icli"></i>
+                </div>
+                <div className="slider-next swiper-button">
+                  <i className="iconly-Arrow-Right-2 icli"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="slider-images" data-swiper="slider-images-ott">
+            <Swiper
+              tag="ul"
+              slidesPerView={1}
+              watchSlidesProgress={true}
+              allowTouchMove={false}
+              loop={true}
+              className="swiper-container"
+            >
+              <SwiperSlide className="p-0">
+                <div className="slider--image block-images">
+                  <img
+                    src="/assets/images/transparent-bg.png"
+                    loading="lazy"
+                    alt="banner"
+                  />
+                </div>
+                <div className="description">
+                  <div className="row align-items-center h-100">
+                    <div className="col-lg-6 col-md-12">
+                      <div className="slider-content">
+                        <div className="mb-3">
+                          <Skeleton width={111} />
+                        </div>
+                        <h1 className="texture-text big-font letter-spacing-1 line-count-3 text-capitalize">
+                          <Skeleton />
+                        </h1>
+                        <p className="line-count-3">
+                          <Skeleton count={3} />
+                        </p>
+                        <Skeleton width={65} />
+                        <Skeleton
+                          className="btn text-uppercase position-relative iq-button"
+                          width={155}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Fragment>
+);
 
 HorizontalSlider.displayName = HorizontalSlider;
 export default HorizontalSlider;
