@@ -5,27 +5,33 @@ import { useCollection } from "../../hooks";
 import { formatDate, sortByReleaseAsc } from "../../helpers";
 import { detailPath, tmdbImgPath } from "../../services";
 
-const MoviesRecommendedForYou = memo(({ data }) => {
+const Collections = memo(({ data }) => {
   const {
     data: collectionData,
     error,
     isLoading,
   } = useCollection({ id: data?.id }, [data?.id]);
 
-  if (!collectionData || isLoading || error) return null;
+  if (!collectionData || error) return null;
+
+  const listData = isLoading
+    ? [...Array(10)]
+    : collectionData.parts
+        .filter((i) => i.vote_count !== 0)
+        .sort(sortByReleaseAsc);
 
   return (
     <Fragment>
       <SectionSlider
+        isLoading={isLoading}
         title={collectionData.name}
-        list={collectionData.parts
-          .filter((i) => i.vote_count !== 0)
-          .sort(sortByReleaseAsc)}
+        list={listData}
         className="recommended-block"
         slidesPerView={6}
       >
         {(i) => (
           <CardStyle
+            isLoading={isLoading}
             image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
             subtitle={formatDate(i.release_date)}
@@ -38,5 +44,5 @@ const MoviesRecommendedForYou = memo(({ data }) => {
   );
 });
 
-MoviesRecommendedForYou.displayName = "MoviesRecommendedForYou";
-export default MoviesRecommendedForYou;
+Collections.displayName = "Collections";
+export default Collections;

@@ -2,9 +2,8 @@ import { Fragment, memo } from "react";
 import { SwiperSlide } from "swiper/react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 
-import { SectionSlider } from "../../common";
+import { SectionSlider, CardSmallSkeleton } from "../../common";
 import { tmdbImgPath, personDetailPath } from "../../services";
 
 const Casts = memo(({ data, viewAllLink = "", isLoading = false }) => {
@@ -24,7 +23,7 @@ const Casts = memo(({ data, viewAllLink = "", isLoading = false }) => {
           {(item) =>
             isLoading ? (
               <Fragment key={item.id}>
-                <LoadingState />
+                <CardSmallSkeleton />
               </Fragment>
             ) : (
               <SwiperSlide key={item.id} as="li">
@@ -54,28 +53,6 @@ const Casts = memo(({ data, viewAllLink = "", isLoading = false }) => {
     </div>
   );
 });
-
-const LoadingState = () => (
-  <SwiperSlide as="li">
-    <Link to="">
-      <Row className="cast-images m-0 align-items-center position-relative">
-        <Col className="col-4 img-box p-0">
-          <Skeleton height={120} />
-        </Col>
-        <Col className="col-8 block-description">
-          <h6 className="iq-title">
-            <Skeleton />
-          </h6>
-          <div className="video-time d-flex align-items-center my-2">
-            <small className="text-white">
-              <Skeleton width={111} />
-            </small>
-          </div>
-        </Col>
-      </Row>
-    </Link>
-  </SwiperSlide>
-);
 
 Casts.displayName = "Casts";
 export default Casts;

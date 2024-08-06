@@ -12,6 +12,7 @@ import { useEnterExit } from "../../utilities/usePage";
 import { creditsPath } from "../../services";
 import { useMovieDetail } from "../../hooks";
 import { sortByVote } from "../../helpers";
+import { Loader } from "../../common";
 
 const MovieDetail = memo(() => {
   const params = useParams();
@@ -28,7 +29,7 @@ const MovieDetail = memo(() => {
 
   useEnterExit();
 
-  if (!data || error) return null;
+  if (!data || error) return <Loader />;
 
   const { credits, belongs_to_collection, images } = data;
   const { cast } = credits;
@@ -43,12 +44,10 @@ const MovieDetail = memo(() => {
         viewAllLink={creditsPath("movie", params?.id)}
       />
       {!!belongs_to_collection && <Collections data={belongs_to_collection} />}
-      {!!backdrops.length && (
-        <ImagesSection
-          isLoading={isLoading}
-          data={backdrops.sort(sortByVote).slice(0, 10)}
-        />
-      )}
+      <ImagesSection
+        isLoading={isLoading}
+        data={backdrops.sort(sortByVote).slice(0, 10)}
+      />
       <Recommendation id={params?.id} />
     </Fragment>
   );

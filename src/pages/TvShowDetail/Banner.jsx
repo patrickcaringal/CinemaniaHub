@@ -3,10 +3,11 @@ import { Row, Col, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import RatingStar from "../../common/rating-star";
-
+import { ShowInfoBannerSkeleton } from "../../common";
 import { tmdbImgPath } from "../../services";
 
-const MovieDetail = memo(({ data }) => {
+const MovieDetail = memo(({ data, isLoading }) => {
+  if (isLoading) return <ShowInfoBannerSkeleton />;
   const bannerImgUrl = tmdbImgPath("original", data.backdrop_path);
 
   return (

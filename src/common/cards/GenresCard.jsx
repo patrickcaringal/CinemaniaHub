@@ -1,9 +1,9 @@
 import { Fragment, memo } from "react";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+import { CardMediumSkeleton } from "../";
 
 const GenresCard = memo(({ image, title, isLoading = false }) => {
-  if (isLoading) return <LoadingState />;
+  if (isLoading) return <CardMediumSkeleton />;
 
   return (
     <Fragment>
@@ -35,18 +35,6 @@ const GenresCard = memo(({ image, title, isLoading = false }) => {
     </Fragment>
   );
 });
-
-const LoadingState = () => (
-  <Fragment>
-    <div className="iq-card-geners card-hover-style-two">
-      <div className="block-images position-relative w-100">
-        <div className="img-box rounded position-relative">
-          <Skeleton height={168} />
-        </div>
-      </div>
-    </div>
-  </Fragment>
-);
 
 GenresCard.displayName = "GenresCard";
 export default GenresCard;

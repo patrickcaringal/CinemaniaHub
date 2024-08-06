@@ -1,10 +1,10 @@
 import { Fragment, memo } from "react";
 import { Link } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
+import { CardLargeSkeleton } from "../";
 
 const CardStyle = memo(
   ({ title, subtitle, link, image, isLoading = false }) => {
-    if (isLoading) return <LoadingState />;
+    if (isLoading) return <CardLargeSkeleton />;
 
     return (
       <Fragment>
@@ -135,18 +135,6 @@ const CardStyle = memo(
       </Fragment>
     );
   }
-);
-
-const LoadingState = () => (
-  <Fragment>
-    <div className="iq-card">
-      <div className="block-images position-relative">
-        <div className="img-box">
-          <Skeleton className="img-fluid object-cover" height={264} />
-        </div>
-      </div>
-    </div>
-  </Fragment>
 );
 
 CardStyle.displayName = "CardStyle";

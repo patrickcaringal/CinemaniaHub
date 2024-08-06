@@ -16,13 +16,14 @@ const Recommendation = memo(({ id }) => {
     id,
   });
 
-  if (!recommendData?.length || isLoading || error) return null;
+  if (!recommendData || error) return null;
 
   const listData = embedGenreNames("tv", recommendData);
 
   return (
     <Fragment>
       <SectionSlider
+        isLoading={isLoading}
         title="Recommendations"
         list={listData}
         className="related-movie-block"
@@ -30,6 +31,7 @@ const Recommendation = memo(({ id }) => {
       >
         {(i) => (
           <CardStyle
+            isLoading={isLoading}
             image={tmdbImgPath("w342", i.poster_path)}
             title={i.title || i.name}
             subtitle={i.genres.join(", ")}

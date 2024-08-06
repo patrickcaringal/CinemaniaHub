@@ -12,6 +12,7 @@ import { useEnterExit } from "../../utilities/usePage";
 
 import { useTvShowDetail } from "../../hooks";
 import { sortByOrder, sortByVote } from "../../helpers";
+import { Loader } from "../../common";
 
 const TvShowsDetail = memo(() => {
   const params = useParams();
@@ -28,7 +29,7 @@ const TvShowsDetail = memo(() => {
 
   useEnterExit();
 
-  if (!data || isLoading || error) return null;
+  if (!data || error) return <Loader />;
 
   const { credits, images, seasons } = data;
   const { cast } = credits;
@@ -36,17 +37,20 @@ const TvShowsDetail = memo(() => {
 
   return (
     <Fragment>
-      <Banner data={data} />
+      <Banner data={data} isLoading={isLoading} />
       <Casts
+        isLoading={isLoading}
         data={cast?.slice(0, 10).sort(sortByOrder)}
         viewAllLink={creditsPath("tv", params?.id)}
       />
-      {!!seasons.length && (
-        <Collections data={seasons.filter((i) => !!i.season_number)} />
-      )}
-      {!!backdrops.length && (
-        <ImagesSection data={backdrops.sort(sortByVote).slice(0, 10)} />
-      )}
+      <Collections
+        isLoading={isLoading}
+        data={seasons.filter((i) => !!i.season_number)}
+      />
+      <ImagesSection
+        isLoading={isLoading}
+        data={backdrops.sort(sortByVote).slice(0, 10)}
+      />
       <Recommendation id={params?.id} />
     </Fragment>
   );
