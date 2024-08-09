@@ -6,11 +6,12 @@ import { personImageFallback } from "../../services";
 const CastCard = memo(({ image, title, category, link = "/cast-detail" }) => {
   return (
     <Fragment>
-      <div className="iq-cast" style={{ width: 185, height: 278 }}>
+      <div className="iq-cast">
         <Link to={link}>
           <img
             src={image}
-            className="rounded "
+            className="rounded"
+            width="100%"
             alt={`cast-${title}`}
             loading="lazy"
             onError={(ev) => {
