@@ -12,9 +12,9 @@ const CreditTab = memo(({ tabs }) => {
   const getEventKey = (id) => `tab${id}`;
 
   const renderCredit = (data) => (
-    <Row xl="5" md="3" sm="2" sx="2" className="row row-cols-1">
+    <Row xl="6" md="3" sm="2" sx="2" className="row row-cols-1">
       {data.map((i, index) => (
-        <Col key={index}>
+        <Col key={index} className="d-flex">
           <CastCard
             title={i.name}
             category={i.character}

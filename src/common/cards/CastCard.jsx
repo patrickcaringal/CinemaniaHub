@@ -6,7 +6,7 @@ import { personImageFallback } from "../../services";
 const CastCard = memo(({ image, title, category, link = "/cast-detail" }) => {
   return (
     <Fragment>
-      <div className="iq-cast">
+      <div className="iq-cast flex-fill">
         <Link to={link}>
           <img
             src={image}

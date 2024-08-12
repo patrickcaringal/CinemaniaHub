@@ -40,8 +40,3 @@ const ListPage = memo(() => {
 
 ListPage.displayName = "ListPage";
 export default ListPage;
-
-/*
-https://api.themoviedb.org/3/movie/{movie_id}/credits
-https://api.themoviedb.org/3/tv/{series_id}/credits
-*/
